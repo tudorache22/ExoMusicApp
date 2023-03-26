@@ -1,0 +1,10 @@
+it\exoBanca\controllers\ContoUtenteController.class
+it\exoBanca\controllers\TransazioneController.class
+it\exoBanca\controllers\UtenteController.class
+it\exoBanca\ejbInterfaces\UtenteControllerInterface.class
+it\exoBanca\controllers\BancaRiferimentoController.class
+it\exoBanca\ejbInterfaces\ContoUtenteControllerInterface.class
+it\exoBanca\controllers\OtpController.class
+it\exoBanca\ejbInterfaces\OtpControllerInterface.class
+it\exoBanca\ejbInterfaces\BancaRiferimentoControllerInterface.class
+it\exoBanca\ejbInterfaces\TransazioneControllerInterface.class

@@ -1,0 +1,5 @@
+it\exoBanca\models\Transazione.class
+it\exoBanca\models\BancaRiferimento.class
+it\exoBanca\models\Otp.class
+it\exoBanca\models\ContoUtente.class
+it\exoBanca\models\Utente.class
