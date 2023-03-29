@@ -1,36 +1,45 @@
 package it.exoBanca.models;
 
 import java.io.Serializable;
-import javax.persistence.*;
 import java.util.List;
 
+import javax.json.bind.annotation.JsonbTransient;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 /**
  * The persistent class for the banca_riferimento database table.
  * 
  */
 @Entity
-@Table(name="banca_riferimento")
-@NamedQuery(name="BancaRiferimento.findAll", query="SELECT b FROM BancaRiferimento b")
+@Table(name = "banca_riferimento")
+@NamedQuery(name = "BancaRiferimento.findAll", query = "SELECT b FROM BancaRiferimento b")
 public class BancaRiferimento implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(name="id_banca")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id_banca")
 	private int idBanca;
 
 	private String email;
 
 	private String indirizzo;
 
-	@Column(name="nome_banca")
+	@Column(name = "nome_banca")
 	private String nomeBanca;
 
 	private String telefono;
 
-	//bi-directional many-to-one association to Utente
-	@OneToMany(mappedBy="bancaRiferimento")
+	// bi-directional many-to-one association to Utente
+	@OneToMany(mappedBy = "bancaRiferimento")
+	@JsonbTransient
 	private List<Utente> utentes;
 
 	public BancaRiferimento() {

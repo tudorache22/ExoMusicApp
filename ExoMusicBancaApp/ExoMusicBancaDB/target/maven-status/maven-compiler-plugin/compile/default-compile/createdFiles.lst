@@ -1,4 +1,5 @@
 it\exoBanca\crud\BaseCrud.class
+it\exoBanca\crud\ContoUtenteCrud.class
 it\exoBanca\crud\OtpCrud.class
 it\exoBanca\crud\TransazioneCrud.class
 it\exoBanca\crud\BancaRiferimentoCrud.class

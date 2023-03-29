@@ -24,6 +24,7 @@
 		<mapper resource="ruolo.xml"/>
 		<mapper resource="artista.xml"/>
 		<mapper resource="abbonamento.xml"/>
+				<mapper resource="tipoAbbonamento.xml"/>
 	</mappers>
 </configuration>
 

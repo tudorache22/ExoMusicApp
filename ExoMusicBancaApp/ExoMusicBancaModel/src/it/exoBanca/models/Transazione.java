@@ -1,38 +1,47 @@
 package it.exoBanca.models;
 
 import java.io.Serializable;
-import javax.persistence.*;
 import java.util.Date;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  * The persistent class for the transazione database table.
  * 
  */
 @Entity
-@NamedQuery(name="Transazione.findAll", query="SELECT t FROM Transazione t")
+@NamedQuery(name = "Transazione.findAll", query = "SELECT t FROM Transazione t")
 public class Transazione implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(name="id_transazione")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id_transazione")
 	private int idTransazione;
 
 	@Temporal(TemporalType.DATE)
-	@Column(name="data_transazione")
+	@Column(name = "data_transazione")
 	private Date dataTransazione;
 
 	private String importo;
 
 	private String informazioni;
 
-	@Column(name="tipo_transazione")
+	@Column(name = "tipo_transazione")
 	private String tipoTransazione;
 
-	//bi-directional many-to-one association to Utente
+	// bi-directional many-to-one association to Utente
 	@ManyToOne
-	@JoinColumn(name="id_utente")
+	@JoinColumn(name = "id_utente")
 	private Utente utente;
 
 	public Transazione() {

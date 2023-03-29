@@ -1,5 +1,7 @@
 package it.exolab.crud;
 
+import java.util.List;
+
 import org.apache.log4j.Logger;
 
 import it.exolab.mapper.TipoAbbonamentoMapper;
@@ -17,6 +19,20 @@ public class TipoAbbonamentoCRUD {
 			TipoAbbonamento tipoAbbonamento = mapper.findById(id);
 
 			return tipoAbbonamento;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+	public List<TipoAbbonamento> findAll() {
+		logger.info("Sei nel TipoAbbonamentoCrud FindAll>>>>");
+		try {
+
+			TipoAbbonamentoMapper mapper = SqlMapFactory.instance().getMapper(TipoAbbonamentoMapper.class);
+			List<TipoAbbonamento> listaAbbonamenti = mapper.findAll();
+
+			return listaAbbonamenti;
 		} catch (Exception e) {
 			e.printStackTrace();
 			return null;

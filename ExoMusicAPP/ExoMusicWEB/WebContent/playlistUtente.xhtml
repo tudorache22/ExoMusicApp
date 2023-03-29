@@ -8,7 +8,7 @@
 <h:head></h:head> 
 <h:body> 
 <div class="card crud-demo">
-    <h:form id="formPlaylistUser">
+    <h:form id="formPlaylistUser" class="centro">
         <p:growl id="messaggiPlaylistUser" showDetail="true" />
 
         <p:toolbar>
@@ -32,7 +32,7 @@
                     <p:resetInput target="manage-playlist-user-content" />
                 </p:commandButton>
                 
-                 <p:commandButton value="ProvaRest" icon="pi pi-plus" actionListener="#{abbonamentoBean.allAbbonamenti()}"
+                 <p:commandButton value="ProvaRest" icon="pi pi-plus" actionListener="#{bancaBean.faiLogin()}"
                     update="manage-playlist-user-content"
                     styleClass="ui-button-success" style="margin-right: .5rem">
                     <p:resetInput target="manage-playlist-user-content" />

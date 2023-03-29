@@ -105,7 +105,7 @@ public class BancaRiferimentoCrud extends BaseCrud<BancaRiferimento> {
 		try {
 			transaction.begin();
 			List<BancaRiferimento> listaBanche = new ArrayList<BancaRiferimento>();
-			Query query = entityManager.createNativeQuery("SELECT * FROM utenti");
+			Query query = entityManager.createNativeQuery("SELECT * FROM banca_riferimento");
 			listaBanche.addAll((List<BancaRiferimento>) query.getResultList());
 			transaction.commit();
 			return listaBanche;

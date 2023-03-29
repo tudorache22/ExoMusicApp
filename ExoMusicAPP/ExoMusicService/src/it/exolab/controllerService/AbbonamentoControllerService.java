@@ -2,6 +2,7 @@ package it.exolab.controllerService;
 
 import java.util.List;
 
+import it.exoBanca.models.Utente;
 import it.exolab.client.ClientAbbonamento;
 import it.exolab.converterJson.ConverterJson;
 import it.exolab.models.Abbonamento;
@@ -53,6 +54,26 @@ public class AbbonamentoControllerService {
 			System.out.println("non ha funzionato");
 			return null;
 		}
+	}
+
+	public String tuttiUtenti() {
+		String risposta = new ClientAbbonamento().callUtenti();
+		return risposta;
+	}
+
+	public Utente faiLogin(Utente utente) {
+		String requestBody = new ConverterJson().convertToJsonUtente(utente);
+		String risposta = new ClientAbbonamento().faiLogin(requestBody);
+		utente = new ConverterJson().convertToUtente(risposta);
+		System.out.println(risposta);
+		return utente;
+	}
+
+	public String richiediOtp(Utente utente) {
+		String requestBody = new ConverterJson().convertToJsonUtente(utente);
+		String risposta = new ClientAbbonamento().richiediOtp(requestBody);
+		System.out.println(risposta);
+		return risposta;
 	}
 
 }

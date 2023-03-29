@@ -1,29 +1,37 @@
 package it.exoBanca.models;
 
 import java.io.Serializable;
-import javax.persistence.*;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
 
 /**
  * The persistent class for the conto_utente database table.
  * 
  */
 @Entity
-@Table(name="conto_utente")
-@NamedQuery(name="ContoUtente.findAll", query="SELECT c FROM ContoUtente c")
+@Table(name = "conto_utente")
+@NamedQuery(name = "ContoUtente.findAll", query = "SELECT c FROM ContoUtente c")
 public class ContoUtente implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(name="id_conto")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id_conto")
 	private int idConto;
 
 	private String saldo;
 
-	//bi-directional many-to-one association to Utente
+	// bi-directional many-to-one association to Utente
 	@ManyToOne
-	@JoinColumn(name="id_utente")
+	@JoinColumn(name = "id_utente")
 	private Utente utente;
 
 	public ContoUtente() {

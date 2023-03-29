@@ -1,5 +1,7 @@
 package it.exolab.controller;
 
+import java.util.List;
+
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 
@@ -25,6 +27,24 @@ public class TipoAbbonamentoController implements TipoAbbonamentoInterface {
 			TipoAbbonamento tipoAbbonamento = new TipoAbbonamentoCRUD().findById(id);
 			SqlMapFactory.instance().commitSession();
 			return tipoAbbonamento;
+		} catch (Exception e) {
+			e.printStackTrace();
+			SqlMapFactory.instance().rollbackSession();
+			return null;
+
+		} finally {
+			SqlMapFactory.instance().closeSession();
+		}
+	}
+
+	@Override
+	public List<TipoAbbonamento> findAll() {
+		try {
+			SqlMapFactory.instance().openSession();
+			logger.info("Sei nel controller findAll>>>");
+			List<TipoAbbonamento> listaAbbonamenti = new TipoAbbonamentoCRUD().findAll();
+			SqlMapFactory.instance().commitSession();
+			return listaAbbonamenti;
 		} catch (Exception e) {
 			e.printStackTrace();
 			SqlMapFactory.instance().rollbackSession();

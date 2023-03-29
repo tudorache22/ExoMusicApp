@@ -125,7 +125,7 @@ public class UtenteCrud extends BaseCrud<Utente> {
 		try {
 			transaction.begin();
 			List<Utente> listaUtenti = new ArrayList<Utente>();
-			Query query = entityManager.createNativeQuery("SELECT * FROM utenti");
+			Query query = entityManager.createNativeQuery("SELECT * FROM utente");
 			listaUtenti.addAll((List<Utente>) query.getResultList());
 			transaction.commit();
 			return listaUtenti;

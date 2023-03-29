@@ -1,0 +1,8 @@
+it\exoBanca\rest\BancaRiferimentoRest.class
+it\exoBanca\rest\BaseRest.class
+it\exoBanca\rest\UtenteRest.class
+it\exoBanca\rest\TransazioneRest.class
+it\exoBanca\conf\EJBFactory.class
+it\exoBanca\rest\ContoUtenteRest.class
+it\exoBanca\rest\OtpRest.class
+it\exoBanca\conf\ControllerRestApplication.class

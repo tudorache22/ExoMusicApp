@@ -1,7 +1,7 @@
 @charset "ISO-8859-1";
 body {
   font-family: Arial, sans-serif;
-  background-color: #faf9f9;
+  background-color: #CBE4DE;
 }
 
 
@@ -83,3 +83,11 @@ form{
   text-align: left;
 }
 
+.foto{
+  display: block;
+  margin-top:20px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 120px;
+  height: 120px;
+}

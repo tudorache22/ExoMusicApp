@@ -1,40 +1,45 @@
 package it.exoBanca.models;
 
 import java.io.Serializable;
-import javax.persistence.*;
-import java.util.Date;
+import java.time.LocalDateTime;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
 
 /**
  * The persistent class for the otp database table.
  * 
  */
 @Entity
-@NamedQuery(name="Otp.findAll", query="SELECT o FROM Otp o")
+@NamedQuery(name = "Otp.findAll", query = "SELECT o FROM Otp o")
 public class Otp implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(name="id_otp")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id_otp")
 	private int idOtp;
 
-	@Column(name="codice_otp")
+	@Column(name = "codice_otp")
 	private String codiceOtp;
 
-	@Temporal(TemporalType.DATE)
-	@Column(name="data_creazione")
-	private Date dataCreazione;
+	@Column(name = "data_creazione")
+	private LocalDateTime dataCreazione;
 
-	@Temporal(TemporalType.DATE)
-	@Column(name="data_scadenza")
-	private Date dataScadenza;
+	@Column(name = "data_scadenza")
+	private LocalDateTime dataScadenza;
 
 	private String stato;
 
-	//bi-directional many-to-one association to Utente
+	// bi-directional many-to-one association to Utente
 	@ManyToOne
-	@JoinColumn(name="id_utente")
+	@JoinColumn(name = "id_utente")
 	private Utente utente;
 
 	public Otp() {
@@ -56,19 +61,19 @@ public class Otp implements Serializable {
 		this.codiceOtp = codiceOtp;
 	}
 
-	public Date getDataCreazione() {
+	public LocalDateTime getDataCreazione() {
 		return this.dataCreazione;
 	}
 
-	public void setDataCreazione(Date dataCreazione) {
+	public void setDataCreazione(LocalDateTime dataCreazione) {
 		this.dataCreazione = dataCreazione;
 	}
 
-	public Date getDataScadenza() {
+	public LocalDateTime getDataScadenza() {
 		return this.dataScadenza;
 	}
 
-	public void setDataScadenza(Date dataScadenza) {
+	public void setDataScadenza(LocalDateTime dataScadenza) {
 		this.dataScadenza = dataScadenza;
 	}
 

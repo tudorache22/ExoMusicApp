@@ -5,6 +5,7 @@ import java.util.List;
 import javax.ejb.Local;
 
 import it.exoBanca.models.Otp;
+import it.exoBanca.models.Utente;
 
 @Local
 public interface OtpControllerInterface {
@@ -18,5 +19,7 @@ public interface OtpControllerInterface {
 	List<Otp> findAll();
 
 	void delete(Otp model);
+
+	Otp nuovoOtp(Utente utente);
 
 }

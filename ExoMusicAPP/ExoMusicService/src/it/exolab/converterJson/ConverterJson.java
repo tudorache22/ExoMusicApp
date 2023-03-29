@@ -6,6 +6,8 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import it.exoBanca.models.Otp;
+import it.exoBanca.models.Utente;
 import it.exolab.models.Abbonamento;
 
 public class ConverterJson {
@@ -49,6 +51,57 @@ public class ConverterJson {
 			e.printStackTrace();
 			return null;
 		}
+	}
+
+	public String convertToJsonUtente(Utente utente) {
+		ObjectMapper mapper = new ObjectMapper();
+
+		try {
+			String json = mapper.writeValueAsString(utente);
+			return json;
+
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+	public Utente convertToUtente(String json) {
+		ObjectMapper mapper = new ObjectMapper();
+		try {
+			Utente utente = mapper.readValue(json, Utente.class);
+			return utente;
+
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+	public Otp convertJsonToOtp(String json) {
+		ObjectMapper mapper = new ObjectMapper();
+		try {
+			Otp otp = mapper.readValue(json, Otp.class);
+			return otp;
+
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+	public String convertOtpToJson(Otp otp) {
+		ObjectMapper mapper = new ObjectMapper();
+
+		try {
+			String json = mapper.writeValueAsString(otp);
+			return json;
+
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+			return null;
+		}
+
 	}
 
 }

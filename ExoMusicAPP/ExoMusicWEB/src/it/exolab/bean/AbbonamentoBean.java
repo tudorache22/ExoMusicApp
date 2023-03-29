@@ -8,49 +8,45 @@ import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 
-import it.exolab.controllerService.AbbonamentoControllerService;
-import it.exolab.interfaces.AbbonamentoInterface;
-import it.exolab.models.Abbonamento;
+import it.exolab.interfaces.TipoAbbonamentoInterface;
+import it.exolab.models.TipoAbbonamento;
 
 @Named
 @SessionScoped
 public class AbbonamentoBean implements Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -2414797046317356295L;
-	private Abbonamento abbonamento;
-	private List<Abbonamento> listaAbbonamenti;
+
+	private TipoAbbonamento abbonamentoSelezionato;
+
+	private List<TipoAbbonamento> listaAbbonamenti;
 
 	@EJB
-	AbbonamentoInterface abbonamentoInterface;
+	TipoAbbonamentoInterface tipoAbbonamentoInterface;
 
 	@PostConstruct
 	public void init() {
-		abbonamento = new Abbonamento();
+		abbonamentoSelezionato = new TipoAbbonamento();
+		findAll();
 	}
 
-	public void allAbbonamenti() {
-		System.out.println("Sei nel bean abbonamenti");
-		AbbonamentoControllerService service = new AbbonamentoControllerService();
-		listaAbbonamenti = service.tuttiAbbonamenti();
-		System.out.println(listaAbbonamenti);
+	public void findAll() {
+		listaAbbonamenti = tipoAbbonamentoInterface.findAll();
 	}
 
-	public Abbonamento getAbbonamento() {
-		return abbonamento;
+	public TipoAbbonamento getAbbonamentoSelezionato() {
+		return abbonamentoSelezionato;
 	}
 
-	public void setAbbonamento(Abbonamento abbonamento) {
-		this.abbonamento = abbonamento;
+	public void setAbbonamentoSelezionato(TipoAbbonamento abbonamentoSelezionato) {
+		this.abbonamentoSelezionato = abbonamentoSelezionato;
 	}
 
-	public List<Abbonamento> getListaAbbonamenti() {
+	public List<TipoAbbonamento> getListaAbbonamenti() {
 		return listaAbbonamenti;
 	}
 
-	public void setListaAbbonamenti(List<Abbonamento> listaAbbonamenti) {
+	public void setListaAbbonamenti(List<TipoAbbonamento> listaAbbonamenti) {
 		this.listaAbbonamenti = listaAbbonamenti;
 	}
 

@@ -1,22 +1,31 @@
 package it.exoBanca.models;
 
 import java.io.Serializable;
-import javax.persistence.*;
 import java.util.List;
 
+import javax.json.bind.annotation.JsonbTransient;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 
 /**
  * The persistent class for the utente database table.
  * 
  */
 @Entity
-@NamedQuery(name="Utente.findAll", query="SELECT u FROM Utente u")
+@NamedQuery(name = "Utente.findAll", query = "SELECT u FROM Utente u")
 public class Utente implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(name="id_utente")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id_utente")
 	private int idUtente;
 
 	private String cognome;
@@ -27,21 +36,25 @@ public class Utente implements Serializable {
 
 	private String password;
 
-	//bi-directional many-to-one association to ContoUtente
-	@OneToMany(mappedBy="utente")
+	// bi-directional many-to-one association to ContoUtente
+	@OneToMany(mappedBy = "utente")
+	@JsonbTransient
 	private List<ContoUtente> contoUtentes;
 
-	//bi-directional many-to-one association to Otp
-	@OneToMany(mappedBy="utente")
+	// bi-directional many-to-one association to Otp
+	@OneToMany(mappedBy = "utente")
+	@JsonbTransient
 	private List<Otp> otps;
 
-	//bi-directional many-to-one association to Transazione
-	@OneToMany(mappedBy="utente")
+	// bi-directional many-to-one association to Transazione
+	@OneToMany(mappedBy = "utente")
+	@JsonbTransient
 	private List<Transazione> transaziones;
 
-	//bi-directional many-to-one association to BancaRiferimento
+	// bi-directional many-to-one association to BancaRiferimento
 	@ManyToOne
-	@JoinColumn(name="id_banca")
+	@JsonbTransient
+	@JoinColumn(name = "id_banca")
 	private BancaRiferimento bancaRiferimento;
 
 	public Utente() {
