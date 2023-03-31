@@ -1,5 +1,6 @@
 package it.exoBanca.models;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
@@ -12,7 +13,8 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="anagrafica")
-public class Anagrafica {
+public class Anagrafica implements Serializable{
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
