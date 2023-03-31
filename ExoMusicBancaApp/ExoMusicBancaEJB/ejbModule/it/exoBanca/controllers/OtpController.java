@@ -171,26 +171,26 @@ public class OtpController extends BaseController implements OtpControllerInterf
 
 	}
 
-	public Otp findOtp(String codice) {
-		Utente utenteTrovato;
-		EntityManager entityManager = getEntityManager();
-		EntityTransaction transaction = entityManager.getTransaction();
-		logger.info("sei nel controllerOtp findOtp >>>" + codice);
-
-		try {
-			transaction.begin();
-			Query query = entityManager.createQuery("Select o FROM Otp u WHERE o.codice_otp = :codiceOtp");
-			query.setParameter("codiceOtp", codice);
-			utenteTrovato = (Utente) query.getSingleResult();
-			System.out.println(utenteTrovato);
-			transaction.commit();
-			return utenteTrovato;
-		} catch (Exception e) {
-			e.printStackTrace();
-			transaction.rollback();
-			return null;
-		} finally {
-			entityManager.close();
-		}
-	}
+//	public Otp findOtp(String codice) {
+//		Utente utenteTrovato;
+//		EntityManager entityManager = getEntityManager();
+//		EntityTransaction transaction = entityManager.getTransaction();
+//		logger.info("sei nel controllerOtp findOtp >>>" + codice);
+//
+//		try {
+//			transaction.begin();
+//			Query query = entityManager.createQuery("Select o FROM Otp u WHERE o.codice_otp = :codiceOtp");
+//			query.setParameter("codiceOtp", codice);
+//			utenteTrovato = (Utente) query.getSingleResult();
+//			System.out.println(utenteTrovato);
+//			transaction.commit();
+//			return utenteTrovato;
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//			transaction.rollback();
+//			return null;
+//		} finally {
+//			entityManager.close();
+//		}
+//	}
 }
