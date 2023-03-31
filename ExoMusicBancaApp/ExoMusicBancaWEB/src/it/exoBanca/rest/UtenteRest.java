@@ -21,10 +21,9 @@ import it.exoBanca.models.Utente;
 @Path("/UtenteRest")
 public class UtenteRest extends BaseRest<Utente> {
 
-	private UtenteControllerInterface utenteControllerInterface;
-
 	final static Logger logger = Logger.getLogger(UtenteRest.class);
 
+	@Override
 	@POST
 	@Path("/insertUtente")
 	@Produces({ "application/json" })
@@ -41,6 +40,7 @@ public class UtenteRest extends BaseRest<Utente> {
 		}
 	}
 
+	@Override
 	@PUT
 	@Path("/updateUtente")
 	@Produces({ "application/json" })
@@ -57,6 +57,7 @@ public class UtenteRest extends BaseRest<Utente> {
 		}
 	}
 
+	@Override
 	@GET
 	@Path("/findUtenteById/{idUtente}")
 	@Produces({ "application/json" })
@@ -73,6 +74,7 @@ public class UtenteRest extends BaseRest<Utente> {
 		}
 	}
 
+	@Override
 	@GET
 	@Path("/findAllUtenti")
 	@Produces({ "application/json" })
@@ -89,6 +91,7 @@ public class UtenteRest extends BaseRest<Utente> {
 		}
 	}
 
+	@Override
 	@DELETE
 	@Path("/deleteUtente")
 	@Produces({ "application/json" })

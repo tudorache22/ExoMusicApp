@@ -1,5 +1,8 @@
 package it.exoBanca.models;
 
+import java.time.LocalDateTime;
+import java.util.Objects;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -27,6 +30,9 @@ public class Anagrafica {
 
 	@Column(name="luogo_nascita")
 	private String luogoNascita;
+
+	@Column(name="data_nascita")
+	private LocalDateTime dataNascita;
 
 	@Column(name="provincia")
 	private String provincia;
@@ -95,6 +101,41 @@ public class Anagrafica {
 	}
 	public void setSesso(Character sesso) {
 		this.sesso = sesso;
+	}
+
+	public LocalDateTime getDataNascita() {
+		return dataNascita;
+	}
+
+	public void setDataNascita(LocalDateTime dataNascita) {
+		this.dataNascita = dataNascita;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(codiceFiscale, cognome, dataNascita, idAnagrafica, luogoNascita, nome, provincia, sesso);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Anagrafica other = (Anagrafica) obj;
+		return Objects.equals(codiceFiscale, other.codiceFiscale) && Objects.equals(cognome, other.cognome)
+				&& Objects.equals(dataNascita, other.dataNascita) && Objects.equals(idAnagrafica, other.idAnagrafica)
+				&& Objects.equals(luogoNascita, other.luogoNascita) && Objects.equals(nome, other.nome)
+				&& Objects.equals(provincia, other.provincia) && Objects.equals(sesso, other.sesso);
+	}
+
+	@Override
+	public String toString() {
+		return "Anagrafica [idAnagrafica=" + idAnagrafica + ", nome=" + nome + ", cognome=" + cognome
+				+ ", codiceFiscale=" + codiceFiscale + ", luogoNascita=" + luogoNascita + ", dataNascita=" + dataNascita
+				+ ", provincia=" + provincia + ", sesso=" + sesso + "]";
 	}
 
 

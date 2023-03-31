@@ -17,15 +17,14 @@ import org.apache.log4j.Logger;
 import it.exoBanca.conf.EJBFactory;
 import it.exoBanca.ejbInterfaces.OtpControllerInterface;
 import it.exoBanca.models.Otp;
-import it.exoBanca.models.Utente;
+import it.exoBanca.models.Transazione;
 
 @Path("/OtpRest")
 public class OtpRest extends BaseRest<Otp> {
 
-	private OtpControllerInterface otpControllerInterface;
-
 	final static Logger logger = Logger.getLogger(OtpRest.class);
 
+	@Override
 	@POST
 	@Path("/insertOtp")
 	@Produces({ "application/json" })
@@ -42,6 +41,7 @@ public class OtpRest extends BaseRest<Otp> {
 		}
 	}
 
+	@Override
 	@PUT
 	@Path("/updateOtp")
 	@Produces({ "application/json" })
@@ -58,6 +58,7 @@ public class OtpRest extends BaseRest<Otp> {
 		}
 	}
 
+	@Override
 	@GET
 	@Path("/findOtpById/{idOtp}")
 	@Produces({ "application/json" })
@@ -73,6 +74,7 @@ public class OtpRest extends BaseRest<Otp> {
 		}
 	}
 
+	@Override
 	@GET
 	@Path("/findAllOtp")
 	@Produces({ "application/json" })
@@ -89,6 +91,7 @@ public class OtpRest extends BaseRest<Otp> {
 		}
 	}
 
+	@Override
 	@DELETE
 	@Path("/deleteOtp")
 	@Produces({ "application/json" })
@@ -109,13 +112,13 @@ public class OtpRest extends BaseRest<Otp> {
 	@Path("/creaOtp")
 	@Produces({ "application/json" })
 	@Consumes({ "application/json" })
-	public Response creaOtp(Utente utente) {
+	public Response creaOtp(Transazione transazione) {
 		logger.info("sei nel OtpRest Crea >>>");
 		try {
-			Otp otp = new EJBFactory<OtpControllerInterface>(OtpControllerInterface.class).getEJB().nuovoOtp(utente);
+			Otp otp = new EJBFactory<OtpControllerInterface>(OtpControllerInterface.class).getEJB().nuovoOtp(transazione);
 //			new EmailFactory().invioEmailStandard(utente, otp);
 			System.out.println("email inviata");
-			return Response.status(201).entity(otp.getCodiceOtp()).build();
+			return Response.status(201).entity(otp.getCodice()).build();
 
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -1,5 +1,6 @@
 package it.exoBanca.controllers;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import javax.ejb.LocalBean;
@@ -7,7 +8,9 @@ import javax.ejb.Stateless;
 
 import it.exoBanca.ejbInterfaces.OtpControllerInterface;
 import it.exoBanca.models.Otp;
+import it.exoBanca.models.Transazione;
 import it.exolab.costanti.Const;
+import it.exolab.generatoreOtp.GeneraOtp;
 
 @Stateless(name="OtpControllerInterface")
 @LocalBean
@@ -41,6 +44,21 @@ public class OtpEJB extends BaseEJB<Otp> implements OtpControllerInterface{
 	public List<Otp> findAll() {
 		// TODO Auto-generated method stub
 		return super.findAll(Const.TABELLA_OTP);
+	}
+
+	public Otp nuovoOtp(Transazione transazione) {
+		try {
+			Otp otp = new Otp();
+			otp.setCodice(new GeneraOtp().generator());
+			otp.setCreazione(LocalDateTime.now());
+			otp.setScadenza(LocalDateTime.now().plusDays(1));
+			otp.setStato(Otp.STATO_ATTIVO);
+			otp.setIdTransazione(transazione.getIdTransazione());
+			insert(otp);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 }

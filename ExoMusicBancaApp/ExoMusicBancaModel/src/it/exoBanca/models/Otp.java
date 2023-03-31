@@ -13,10 +13,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-/**
- * The persistent class for the otp database table.
- *
- */
 @Entity
 @Table(name="otp")
 public class Otp implements Serializable {
@@ -25,7 +21,7 @@ public class Otp implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_otp")
-	private int idOtp;
+	private Integer idOtp;
 
 	@Column(name = "codice")
 	private String codice;
@@ -39,18 +35,24 @@ public class Otp implements Serializable {
 	@Column(name="stato")
 	private String stato;
 
+	@Column(name="id_transazione")
+	private Integer idTransazione;
+
 	@ManyToOne
 	@JoinColumn(name = "id_transazione")
 	private Transazione transazione;
 
+	public static final String STATO_ATTIVO = "attivo";
+	public static final String STATO_SCADUTO = "scaduto";
+
 	public Otp() {
 	}
 
-	public int getIdOtp() {
+	public Integer getIdOtp() {
 		return idOtp;
 	}
 
-	public void setIdOtp(int idOtp) {
+	public void setIdOtp(Integer idOtp) {
 		this.idOtp = idOtp;
 	}
 
@@ -84,6 +86,14 @@ public class Otp implements Serializable {
 
 	public void setStato(String stato) {
 		this.stato = stato;
+	}
+
+	public Integer getIdTransazione() {
+		return idTransazione;
+	}
+
+	public void setIdTransazione(Integer idTransazione) {
+		this.idTransazione = idTransazione;
 	}
 
 	public Transazione getTransazione() {

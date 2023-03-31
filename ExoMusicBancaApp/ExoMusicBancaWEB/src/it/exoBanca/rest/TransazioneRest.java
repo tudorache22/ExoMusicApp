@@ -21,10 +21,9 @@ import it.exoBanca.models.Transazione;
 @Path("/TransazioneRest")
 public class TransazioneRest extends BaseRest<Transazione> {
 
-	private TransazioneControllerInterface transazioneControllerInterface;
-
 	final static Logger logger = Logger.getLogger(TransazioneRest.class);
 
+	@Override
 	@POST
 	@Path("/insertTransazione")
 	@Produces({ "application/json" })
@@ -42,6 +41,7 @@ public class TransazioneRest extends BaseRest<Transazione> {
 		}
 	}
 
+	@Override
 	@PUT
 	@Path("/updateTransazione")
 	@Produces({ "application/json" })
@@ -59,6 +59,7 @@ public class TransazioneRest extends BaseRest<Transazione> {
 		}
 	}
 
+	@Override
 	@GET
 	@Path("/findTransazioneById/{idTransazione}")
 	@Produces({ "application/json" })
@@ -75,6 +76,7 @@ public class TransazioneRest extends BaseRest<Transazione> {
 		}
 	}
 
+	@Override
 	@GET
 	@Path("/findAllTransazioni")
 	@Produces({ "application/json" })
@@ -91,6 +93,7 @@ public class TransazioneRest extends BaseRest<Transazione> {
 		}
 	}
 
+	@Override
 	@DELETE
 	@Path("/deleteTransazione")
 	@Produces({ "application/json" })
