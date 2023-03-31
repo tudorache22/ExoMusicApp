@@ -2,6 +2,7 @@ package it.exoBanca.models;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,14 +11,14 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedQuery;
+import javax.persistence.Table;
 
 /**
  * The persistent class for the otp database table.
- * 
+ *
  */
 @Entity
-@NamedQuery(name = "Otp.findAll", query = "SELECT o FROM Otp o")
+@Table(name="otp")
 public class Otp implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -26,71 +27,98 @@ public class Otp implements Serializable {
 	@Column(name = "id_otp")
 	private int idOtp;
 
-	@Column(name = "codice_otp")
-	private String codiceOtp;
+	@Column(name = "codice")
+	private String codice;
 
-	@Column(name = "data_creazione")
-	private LocalDateTime dataCreazione;
+	@Column(name = "creazione")
+	private LocalDateTime creazione;
 
-	@Column(name = "data_scadenza")
-	private LocalDateTime dataScadenza;
+	@Column(name = "scadenza")
+	private LocalDateTime scadenza;
 
+	@Column(name="stato")
 	private String stato;
 
-	// bi-directional many-to-one association to Utente
 	@ManyToOne
-	@JoinColumn(name = "id_utente")
-	private Utente utente;
+	@JoinColumn(name = "id_transazione")
+	private Transazione transazione;
 
 	public Otp() {
 	}
 
 	public int getIdOtp() {
-		return this.idOtp;
+		return idOtp;
 	}
 
 	public void setIdOtp(int idOtp) {
 		this.idOtp = idOtp;
 	}
 
-	public String getCodiceOtp() {
-		return this.codiceOtp;
+	public String getCodice() {
+		return codice;
 	}
 
-	public void setCodiceOtp(String codiceOtp) {
-		this.codiceOtp = codiceOtp;
+	public void setCodice(String codice) {
+		this.codice = codice;
 	}
 
-	public LocalDateTime getDataCreazione() {
-		return this.dataCreazione;
+	public LocalDateTime getCreazione() {
+		return creazione;
 	}
 
-	public void setDataCreazione(LocalDateTime dataCreazione) {
-		this.dataCreazione = dataCreazione;
+	public void setCreazione(LocalDateTime creazione) {
+		this.creazione = creazione;
 	}
 
-	public LocalDateTime getDataScadenza() {
-		return this.dataScadenza;
+	public LocalDateTime getScadenza() {
+		return scadenza;
 	}
 
-	public void setDataScadenza(LocalDateTime dataScadenza) {
-		this.dataScadenza = dataScadenza;
+	public void setScadenza(LocalDateTime scadenza) {
+		this.scadenza = scadenza;
 	}
 
 	public String getStato() {
-		return this.stato;
+		return stato;
 	}
 
 	public void setStato(String stato) {
 		this.stato = stato;
 	}
 
-	public Utente getUtente() {
-		return this.utente;
+	public Transazione getTransazione() {
+		return transazione;
 	}
 
-	public void setUtente(Utente utente) {
-		this.utente = utente;
+	public void setTransazione(Transazione transazione) {
+		this.transazione = transazione;
 	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(codice, creazione, idOtp, scadenza, stato, transazione);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Otp other = (Otp) obj;
+		return Objects.equals(codice, other.codice) && Objects.equals(creazione, other.creazione)
+				&& idOtp == other.idOtp && Objects.equals(scadenza, other.scadenza)
+				&& Objects.equals(stato, other.stato) && Objects.equals(transazione, other.transazione);
+	}
+
+	@Override
+	public String toString() {
+		return "Otp [idOtp=" + idOtp + ", codice=" + codice + ", creazione=" + creazione + ", scadenza=" + scadenza
+				+ ", stato=" + stato + ", transazione=" + transazione + "]";
+	}
+
+
 
 }

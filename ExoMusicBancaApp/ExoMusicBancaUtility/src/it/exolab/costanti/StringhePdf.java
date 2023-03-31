@@ -24,7 +24,7 @@ public class StringhePdf {
 
 	public static String contenutoPdfPlaylist(Utente utente) {
 
-		return ("Il Cliente " + utente.getNome() + " " + utente.getCognome() + " ,associato all'email: "
+		return ("Il Cliente " + utente.getAnagrafica().getNome() + " " + utente.getAnagrafica().getCognome() + " ,associato all'email: "
 				+ utente.getEmail()
 				+ " , dichiara di voler esportare il contenuto delle sue playlist per uso personale e non divulgativo."
 				+ "In base alle normative 100/c232 l'azienda ExoMusic si impegna a mantenere i dati privati dell'utente e abilita l'esportazione delle playlist personali.");

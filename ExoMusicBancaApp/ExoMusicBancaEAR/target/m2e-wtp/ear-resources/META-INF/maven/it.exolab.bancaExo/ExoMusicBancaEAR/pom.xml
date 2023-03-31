@@ -6,19 +6,19 @@
   <packaging>ear</packaging>
   <name>ExoMusicBancaEAR</name>
   
-  <dependencies>
-	  <dependency>
-	      <groupId>it.exolab.bancaExo</groupId>
-	      <artifactId>ExoMusicBancaDB</artifactId>
-	      <version>0.0.1-SNAPSHOT</version>
-	      <type>jar</type>
-	    </dependency>	    
+  <dependencies>	    
         <dependency>
 	      <groupId>it.exolab.bancaExo</groupId>
 	      <artifactId>ExoMusicBancaModel</artifactId>
 	      <version>0.0.1-SNAPSHOT</version>
 	      <type>jar</type>
-	    </dependency>    
+	    </dependency>
+	    <dependency>
+	      <groupId>it.exolab.bancaExo</groupId>
+	      <artifactId>ExoMusicBancaUtility</artifactId>
+	      <version>0.0.1-SNAPSHOT</version>
+	      <type>jar</type>
+	    </dependency>     
    	    <dependency>
 	      <groupId>it.exolab.bancaExo</groupId>
 	      <artifactId>ExoMusicBancaEJB</artifactId>
@@ -48,9 +48,9 @@
               <groupId>it.exolab.bancaExo</groupId>
               <artifactId>ExoMusicBancaModel</artifactId>
             </jarModule>
-             <jarModule>
+            <jarModule>
               <groupId>it.exolab.bancaExo</groupId>
-              <artifactId>ExoMusicBancaDB</artifactId>
+              <artifactId>ExoMusicBancaUtility</artifactId>
             </jarModule>
              <ejbModule>
               <groupId>it.exolab.bancaExo</groupId>

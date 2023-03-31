@@ -2,6 +2,7 @@ package it.exoBanca.models;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Objects;
 
 import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.Column;
@@ -9,169 +10,128 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 /**
  * The persistent class for the utente database table.
- * 
+ *
  */
 @Entity
-@NamedQuery(name = "Utente.findAll", query = "SELECT u FROM Utente u")
+@Table(name="utente")
 public class Utente implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_utente")
-	private int idUtente;
+	private Integer idUtente;
 
-	private String cognome;
-
+	@Column(name="email")
 	private String email;
 
-	private String nome;
-
+	@Column(name="password")
 	private String password;
 
-	// bi-directional many-to-one association to ContoUtente
-	@OneToMany(mappedBy = "utente")
-	@JsonbTransient
-	private List<ContoUtente> contoUtentes;
+	@Column(name="id_ruolo")
+	private Integer idRuolo;
 
-	// bi-directional many-to-one association to Otp
-	@OneToMany(mappedBy = "utente")
+	@OneToOne
 	@JsonbTransient
-	private List<Otp> otps;
+	private Anagrafica anagrafica;
 
-	// bi-directional many-to-one association to Transazione
-	@OneToMany(mappedBy = "utente")
+	@OneToMany(mappedBy="utente")
 	@JsonbTransient
-	private List<Transazione> transaziones;
+	private List<Transazione> listaTransazioni;
 
-	// bi-directional many-to-one association to BancaRiferimento
-	@ManyToOne
-	@JsonbTransient
-	@JoinColumn(name = "id_banca")
-	private BancaRiferimento bancaRiferimento;
+	@OneToOne
+	private ContoCorrente contoCorrente;
 
 	public Utente() {
 	}
 
-	public int getIdUtente() {
-		return this.idUtente;
+	public Integer getIdUtente() {
+		return idUtente;
 	}
 
-	public void setIdUtente(int idUtente) {
+	public void setIdUtente(Integer idUtente) {
 		this.idUtente = idUtente;
 	}
 
-	public String getCognome() {
-		return this.cognome;
-	}
-
-	public void setCognome(String cognome) {
-		this.cognome = cognome;
-	}
-
 	public String getEmail() {
-		return this.email;
+		return email;
 	}
 
 	public void setEmail(String email) {
 		this.email = email;
 	}
 
-	public String getNome() {
-		return this.nome;
-	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-
 	public String getPassword() {
-		return this.password;
+		return password;
 	}
 
 	public void setPassword(String password) {
 		this.password = password;
 	}
 
-	public List<ContoUtente> getContoUtentes() {
-		return this.contoUtentes;
+	public Integer getIdRuolo() {
+		return idRuolo;
 	}
 
-	public void setContoUtentes(List<ContoUtente> contoUtentes) {
-		this.contoUtentes = contoUtentes;
+	public void setIdRuolo(Integer idRuolo) {
+		this.idRuolo = idRuolo;
 	}
 
-	public ContoUtente addContoUtente(ContoUtente contoUtente) {
-		getContoUtentes().add(contoUtente);
-		contoUtente.setUtente(this);
-
-		return contoUtente;
+	public Anagrafica getAnagrafica() {
+		return anagrafica;
 	}
 
-	public ContoUtente removeContoUtente(ContoUtente contoUtente) {
-		getContoUtentes().remove(contoUtente);
-		contoUtente.setUtente(null);
-
-		return contoUtente;
+	public void setAnagrafica(Anagrafica anagrafica) {
+		this.anagrafica = anagrafica;
 	}
 
-	public List<Otp> getOtps() {
-		return this.otps;
+	public List<Transazione> getListaTransazioni() {
+		return listaTransazioni;
 	}
 
-	public void setOtps(List<Otp> otps) {
-		this.otps = otps;
+	public void setListaTransazioni(List<Transazione> listaTransazioni) {
+		this.listaTransazioni = listaTransazioni;
 	}
 
-	public Otp addOtp(Otp otp) {
-		getOtps().add(otp);
-		otp.setUtente(this);
-
-		return otp;
+	public ContoCorrente getContoCorrente() {
+		return contoCorrente;
 	}
 
-	public Otp removeOtp(Otp otp) {
-		getOtps().remove(otp);
-		otp.setUtente(null);
-
-		return otp;
+	public void setContoCorrente(ContoCorrente contoCorrente) {
+		this.contoCorrente = contoCorrente;
 	}
 
-	public List<Transazione> getTransaziones() {
-		return this.transaziones;
+	@Override
+	public int hashCode() {
+		return Objects.hash(anagrafica, contoCorrente, email, idUtente, listaTransazioni, password);
 	}
 
-	public void setTransaziones(List<Transazione> transaziones) {
-		this.transaziones = transaziones;
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Utente other = (Utente) obj;
+		return Objects.equals(anagrafica, other.anagrafica) && Objects.equals(contoCorrente, other.contoCorrente)
+				&& Objects.equals(email, other.email) && Objects.equals(idUtente, other.idUtente)
+				&& Objects.equals(listaTransazioni, other.listaTransazioni) && Objects.equals(password, other.password);
 	}
 
-	public Transazione addTransazione(Transazione transazione) {
-		getTransaziones().add(transazione);
-		transazione.setUtente(this);
-
-		return transazione;
+	@Override
+	public String toString() {
+		return "Utente [idUtente=" + idUtente + ", email=" + email + ", password=" + password + ", anagrafica="
+				+ anagrafica + ", listaTransazioni=" + listaTransazioni + ", contoCorrente=" + contoCorrente + "]";
 	}
 
-	public Transazione removeTransazione(Transazione transazione) {
-		getTransaziones().remove(transazione);
-		transazione.setUtente(null);
 
-		return transazione;
-	}
-
-	public BancaRiferimento getBancaRiferimento() {
-		return this.bancaRiferimento;
-	}
-
-	public void setBancaRiferimento(BancaRiferimento bancaRiferimento) {
-		this.bancaRiferimento = bancaRiferimento;
-	}
 
 }
