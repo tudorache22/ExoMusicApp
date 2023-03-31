@@ -12,34 +12,25 @@
 	      <artifactId>ExoMusicBancaDB</artifactId>
 	      <version>0.0.1-SNAPSHOT</version>
 	      <type>jar</type>
-	      <scope>provided</scope>
-	    </dependency>
-	    
+	    </dependency>	    
         <dependency>
 	      <groupId>it.exolab.bancaExo</groupId>
 	      <artifactId>ExoMusicBancaModel</artifactId>
 	      <version>0.0.1-SNAPSHOT</version>
 	      <type>jar</type>
-	      <scope>provided</scope>
-	    </dependency>
-	    
+	    </dependency>    
    	    <dependency>
 	      <groupId>it.exolab.bancaExo</groupId>
 	      <artifactId>ExoMusicBancaEJB</artifactId>
 	      <version>0.0.1-SNAPSHOT</version>
 	      <type>ejb</type>
-	      <scope>provided</scope>
 	    </dependency>
-	    
    	    <dependency>
 	      <groupId>it.exolab.bancaExo</groupId>
 	      <artifactId>ExoMusicBancaWEB</artifactId>
 	      <version>0.0.1-SNAPSHOT</version>
 	      <type>war</type>
-	      <scope>provided</scope>
 	    </dependency>
-  
-  
   
   </dependencies>
   
@@ -50,32 +41,25 @@
         <version>3.0.2</version>
         <configuration>
           <earSourceDirectory>EarContent</earSourceDirectory>
-           <generateApplicationXml>false</generateApplicationXml>
           <version>8</version>
           <defaultLibBundleDir>lib</defaultLibBundleDir>
           <modules>
            <jarModule>
               <groupId>it.exolab.bancaExo</groupId>
               <artifactId>ExoMusicBancaModel</artifactId>
-              <bundleFileName>ExoMusicBancaModel.jar</bundleFileName>
             </jarModule>
              <jarModule>
               <groupId>it.exolab.bancaExo</groupId>
               <artifactId>ExoMusicBancaDB</artifactId>
-              <bundleFileName>ExoMusicBancaDB.jar</bundleFileName>
             </jarModule>
              <ejbModule>
               <groupId>it.exolab.bancaExo</groupId>
               <artifactId>ExoMusicBancaEJB</artifactId>
-              <bundleFileName>ExoMusicBancaEJB.jar</bundleFileName>
             </ejbModule>
              <webModule>
               <groupId>it.exolab.bancaExo</groupId>
               <artifactId>ExoMusicBancaWEB</artifactId>
-              <contextRoot>/ExoMusicBancaWEB</contextRoot>
-              <bundleFileName>ExoMusicBancaWEB.war</bundleFileName>
             </webModule>
-        
           </modules>
           
         </configuration>

@@ -9,6 +9,7 @@
 		<class>it.exoBanca.models.Otp</class>
 		<class>it.exoBanca.models.Transazione</class>
 		<class>it.exoBanca.models.Utente</class>
+		<class>it.exoBanca.models.Anagrafica</class>
 		
 		<properties>
         	<property name="hibernate.show_sql" value="true"/>
