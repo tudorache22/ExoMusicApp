@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
-            
+                
+    
     
     <wb-module deploy-name="ExoMusicBancaEAR-0.0.1-SNAPSHOT">
-                        
+                                
+        
         
         <wb-resource deploy-path="/" source-path="/target/m2e-wtp/ear-resources"/>
-                        
+                                
+        
         
         <wb-resource deploy-path="/" source-path="/EarContent" tag="defaultRootSource"/>
         <dependent-module archiveName="ExoMusicBancaModel-0.0.1-SNAPSHOT.jar" deploy-path="/lib" handle="module:/resource/ExoMusicBancaModel/ExoMusicBancaModel">
@@ -15,11 +18,9 @@
             <dependency-type>uses</dependency-type>
         </dependent-module>
         <dependent-module archiveName="ExoMusicBancaEJB-0.0.1-SNAPSHOT.jar" deploy-path="/" handle="module:/resource/ExoMusicBancaEJB/ExoMusicBancaEJB">
-            <dependent-object/>
             <dependency-type>uses</dependency-type>
         </dependent-module>
         <dependent-module archiveName="ExoMusicBancaWEB-0.0.1-SNAPSHOT.war" deploy-path="/" handle="module:/resource/ExoMusicBancaWEB/ExoMusicBancaWEB">
-            <dependent-object/>
             <dependency-type>uses</dependency-type>
         </dependent-module>
         <dependent-module archiveName="javax.persistence-api-2.2.jar" deploy-path="/lib" handle="module:/classpath/var/M2_REPO/javax/persistence/javax.persistence-api/2.2/javax.persistence-api-2.2.jar">
@@ -52,9 +53,11 @@
         <dependent-module archiveName="log4j-1.2.17.jar" deploy-path="/lib" handle="module:/classpath/var/M2_REPO/log4j/log4j/1.2.17/log4j-1.2.17.jar">
             <dependency-type>uses</dependency-type>
         </dependent-module>
-                    
+                            
+    
     
     </wb-module>
-        
+            
+
 
 </project-modules>
