@@ -16,11 +16,22 @@ public class Anagrafica {
 	@Column(name="id_anagrafica")
 	private Integer idAnagrafica;
 
+	@Column(name="nome")
 	private String nome;
+
+	@Column(name="cognome")
 	private String cognome;
+
+	@Column(name="codice_fiscale")
 	private String codiceFiscale;
+
+	@Column(name="luogo_nascita")
 	private String luogoNascita;
+
+	@Column(name="provincia")
 	private String provincia;
+
+	@Column(name="sesso")
 	private Character sesso;
 
 	public static final Character SESSO_UOMO = 'M';
@@ -29,8 +40,6 @@ public class Anagrafica {
 	public Anagrafica() {
 
 	}
-
-
 
 	public Anagrafica(Integer idAnagrafica, String nome, String cognome, String codiceFiscale, String luogoNascita,String provincia, Character sesso) {
 		super();
