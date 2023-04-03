@@ -1,5 +1,6 @@
 package it.exoBanca.controllers;
 
+import java.sql.Date;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -51,8 +52,8 @@ public class OtpEJB extends BaseEJB<Otp> implements OtpControllerInterface{
 		try {
 			Otp otp = new Otp();
 			otp.setCodice(new GeneraOtp().generator());
-			otp.setCreazione(LocalDate.now());
-			otp.setScadenza(LocalDate.now().plusDays(1));
+			otp.setCreazione(Date.valueOf(LocalDate.now()));
+			otp.setScadenza(Date.valueOf(LocalDate.now().plusDays(1)));
 			otp.setStato(Otp.STATO_ATTIVO);
 			otp.setIdTransazione(transazione.getIdTransazione());
 			insert(otp);

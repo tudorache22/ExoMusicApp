@@ -1,5 +1,6 @@
 package it.exolab.utility;
 
+import java.sql.Date;
 import java.time.LocalDate;
 
 import it.exoBanca.models.Anagrafica;
@@ -11,10 +12,10 @@ public class ContoCorrenteUtility {
 	private final String voidString = "";
 
 	public static ContoCorrente getContoCorrente(Anagrafica anagrafica) {
-		return getContoCorrente(anagrafica,0f,LocalDate.now().plusYears(10));
+		return getContoCorrente(anagrafica,0f,Date.valueOf(LocalDate.now().plusYears(10)));
 	}
 
-	public static ContoCorrente getContoCorrente(Anagrafica anagrafica,Float saldo,LocalDate data) {
+	public static ContoCorrente getContoCorrente(Anagrafica anagrafica,Float saldo,Date data) {
 		ContoCorrente contoCorrente = new ContoCorrente();
 		contoCorrente.setSaldo(saldo);
 		contoCorrente.setDataScadenza(data);
@@ -50,10 +51,10 @@ public class ContoCorrenteUtility {
 		return result;
 	}
 
-	private String getSuffissoConto(LocalDate data) {
-		char random_1 = Const.CHARS_FOR_CONTO_CORRENTE_1.charAt(data.getDayOfMonth());
-		char random_2 = Const.CHARS_FOR_CONTO_CORRENTE_2.charAt(data.getDayOfMonth());
-		char random_3 = Const.CHARS_FOR_CONTO_CORRENTE_3.charAt(data.getMonthValue());
+	private String getSuffissoConto(Date data) {
+		char random_1 = Const.CHARS_FOR_CONTO_CORRENTE_1.charAt(data.toLocalDate().getDayOfMonth());
+		char random_2 = Const.CHARS_FOR_CONTO_CORRENTE_2.charAt(data.toLocalDate().getDayOfMonth());
+		char random_3 = Const.CHARS_FOR_CONTO_CORRENTE_3.charAt(data.toLocalDate().getMonthValue());
 		return random_1+voidString+random_2+voidString+random_3;
 	}
 

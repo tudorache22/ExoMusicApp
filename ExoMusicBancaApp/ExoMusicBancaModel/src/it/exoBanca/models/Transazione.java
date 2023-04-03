@@ -1,7 +1,7 @@
 package it.exoBanca.models;
 
 import java.io.Serializable;
-import java.time.LocalDate;
+import java.sql.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -28,8 +28,8 @@ public class Transazione implements Serializable {
 	private int idTransazione;
 
 	@Column(name = "data")
-	@JsonbDateFormat(value="YYYY-MM-DD")
-	private LocalDate data;
+	@JsonbDateFormat
+	private Date data;
 
 	@Column(name="importo")
 	private String importo;
@@ -61,11 +61,11 @@ public class Transazione implements Serializable {
 		this.idTransazione = idTransazione;
 	}
 
-	public LocalDate getData() {
+	public Date getData() {
 		return data;
 	}
 
-	public void setData(LocalDate data) {
+	public void setData(Date data) {
 		this.data = data;
 	}
 

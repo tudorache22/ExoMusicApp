@@ -1,7 +1,7 @@
 package it.exoBanca.models;
 
 import java.io.Serializable;
-import java.time.LocalDate;
+import java.sql.Date;
 import java.util.Objects;
 
 import javax.json.bind.annotation.JsonbDateFormat;
@@ -27,12 +27,12 @@ public class Otp implements Serializable {
 	private String codice;
 
 	@Column(name = "creazione")
-	@JsonbDateFormat(value="YYYY-MM-DD")
-	private LocalDate creazione;
+	@JsonbDateFormat
+	private Date creazione;
 
 	@Column(name = "scadenza")
-	@JsonbDateFormat(value="YYYY-MM-DD")
-	private LocalDate scadenza;
+	@JsonbDateFormat
+	private Date scadenza;
 
 	@Column(name="stato")
 	private String stato;
@@ -65,19 +65,19 @@ public class Otp implements Serializable {
 		this.codice = codice;
 	}
 
-	public LocalDate getCreazione() {
+	public Date getCreazione() {
 		return creazione;
 	}
 
-	public void setCreazione(LocalDate creazione) {
+	public void setCreazione(Date creazione) {
 		this.creazione = creazione;
 	}
 
-	public LocalDate getScadenza() {
+	public Date getScadenza() {
 		return scadenza;
 	}
 
-	public void setScadenza(LocalDate scadenza) {
+	public void setScadenza(Date scadenza) {
 		this.scadenza = scadenza;
 	}
 

@@ -1,6 +1,6 @@
 package it.exolab.utility;
 
-import java.time.LocalDate;
+import java.sql.Date;
 
 import it.exoBanca.models.Anagrafica;
 import it.exolab.costanti.Const;
@@ -22,9 +22,9 @@ public class CodiceFiscaleUtility {
 		return checkPrefix(anagrafica.getNome(), anagrafica.getCognome(), anagrafica.getDataNascita(),anagrafica.getSesso());
 	}
 
-	private boolean checkPrefix(String nome, String cognome, LocalDate dataNascita,Character sesso) {
-		String prefix = removeVocals(cognome) + removeVocals(nome) +
-				Integer.toString(dataNascita.getYear()).substring(2) + generateUnicode(dataNascita,sesso);
+	private boolean checkPrefix(String nome, String cognome, Date dataNascita,Character sesso) {
+		String prefix = removeVocals(cognome).substring(0,3).toUpperCase() + removeVocals(nome).substring(0,3).toUpperCase() +
+				Integer.toString(dataNascita.toLocalDate().getYear()).substring(2) + generateUnicode(dataNascita,sesso);
 		return similarTo(prefix, codiceFiscale);
 	}
 
@@ -46,11 +46,11 @@ public class CodiceFiscaleUtility {
 		for (int i = 0; i < prefix.length(); i++) {
 			diff += prefix.charAt(i) == codiceFiscale.charAt(i) ? 0 : 1;
 		}
-		return diff < 3;
+		return diff < 4;
 	}
 
-	private String generateUnicode(LocalDate dataNascita,Character sesso) {
-		String unicode = Const.CODICE_FISCALE_LETTERA_MESE[dataNascita.getMonthValue() -1] + (dataNascita.getDayOfMonth() + (sesso == Anagrafica.SESSO_DONNA ? 40 : 0));
+	private String generateUnicode(Date dataNascita,Character sesso) {
+		String unicode = Const.CODICE_FISCALE_LETTERA_MESE[dataNascita.toLocalDate().getMonthValue() -1] + (dataNascita.toLocalDate().getDayOfMonth() + (sesso == Anagrafica.SESSO_DONNA ? 40 : 0));
 		return unicode;
 	}
 
