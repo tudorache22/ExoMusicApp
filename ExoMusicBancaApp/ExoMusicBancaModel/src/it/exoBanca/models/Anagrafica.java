@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
+import javax.json.bind.annotation.JsonbDateFormat;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,34 +13,35 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="anagrafica")
-public class Anagrafica implements Serializable{
+@Table(name = "anagrafica")
+public class Anagrafica implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="id_anagrafica")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id_anagrafica")
 	private Integer idAnagrafica;
 
-	@Column(name="nome")
+	@Column(name = "nome")
 	private String nome;
 
-	@Column(name="cognome")
+	@Column(name = "cognome")
 	private String cognome;
 
-	@Column(name="codice_fiscale")
+	@Column(name = "codice_fiscale")
 	private String codiceFiscale;
 
-	@Column(name="luogo_nascita")
+	@Column(name = "luogo_nascita")
 	private String luogoNascita;
 
-	@Column(name="data_nascita")
+	@Column(name = "data_nascita")
+	@JsonbDateFormat(value = "yyyy-MM-dd")
 	private LocalDateTime dataNascita;
 
-	@Column(name="provincia")
+	@Column(name = "provincia")
 	private String provincia;
 
-	@Column(name="sesso")
+	@Column(name = "sesso")
 	private Character sesso;
 
 	public static final Character SESSO_UOMO = 'M';
@@ -49,7 +51,8 @@ public class Anagrafica implements Serializable{
 
 	}
 
-	public Anagrafica(Integer idAnagrafica, String nome, String cognome, String codiceFiscale, String luogoNascita,String provincia,LocalDateTime dataNascita, Character sesso) {
+	public Anagrafica(Integer idAnagrafica, String nome, String cognome, String codiceFiscale, String luogoNascita,
+			String provincia, LocalDateTime dataNascita, Character sesso) {
 		super();
 		this.idAnagrafica = idAnagrafica;
 		this.nome = nome;
@@ -61,47 +64,58 @@ public class Anagrafica implements Serializable{
 		this.dataNascita = dataNascita;
 	}
 
-
-
 	public Integer getIdAnagrafica() {
 		return idAnagrafica;
 	}
+
 	public void setIdAnagrafica(Integer idAnagrafica) {
 		this.idAnagrafica = idAnagrafica;
 	}
+
 	public String getNome() {
 		return nome;
 	}
+
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
+
 	public String getCognome() {
 		return cognome;
 	}
+
 	public void setCognome(String cognome) {
 		this.cognome = cognome;
 	}
+
 	public String getCodiceFiscale() {
 		return codiceFiscale;
 	}
+
 	public void setCodiceFiscale(String codiceFiscale) {
 		this.codiceFiscale = codiceFiscale;
 	}
+
 	public String getLuogoNascita() {
 		return luogoNascita;
 	}
+
 	public void setLuogoNascita(String luogoNascita) {
 		this.luogoNascita = luogoNascita;
 	}
+
 	public String getProvincia() {
 		return provincia;
 	}
+
 	public void setProvincia(String provincia) {
 		this.provincia = provincia;
 	}
+
 	public Character getSesso() {
 		return sesso;
 	}
+
 	public void setSesso(Character sesso) {
 		this.sesso = sesso;
 	}
@@ -140,6 +154,5 @@ public class Anagrafica implements Serializable{
 				+ ", codiceFiscale=" + codiceFiscale + ", luogoNascita=" + luogoNascita + ", dataNascita=" + dataNascita
 				+ ", provincia=" + provincia + ", sesso=" + sesso + "]";
 	}
-
 
 }

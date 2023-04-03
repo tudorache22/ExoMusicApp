@@ -21,13 +21,13 @@ public class ControllerRestApplication extends Application {
 	private Set<Object> singletons;
 
 	public ControllerRestApplication() {
-
+		super();
 		CorsFilter corsFilter = new CorsFilter();
 		corsFilter.getAllowedOrigins().add("*");
-        corsFilter.setAllowedMethods("OPTIONS, GET, POST, DELETE, PUT, PATCH");
+		corsFilter.setAllowedMethods("OPTIONS, GET, POST, DELETE, PUT, PATCH");
 
-        singletons = new HashSet<Object>();
-        singletons.add(corsFilter);
+		singletons = new HashSet<Object>();
+		singletons.add(corsFilter);
 
 		classes = new HashSet<>();
 		classes.add(UtenteRest.class);
@@ -35,7 +35,6 @@ public class ControllerRestApplication extends Application {
 		classes.add(ContoCorrenteRest.class);
 		classes.add(OtpRest.class);
 		classes.add(TransazioneRest.class);
-
 
 	}
 

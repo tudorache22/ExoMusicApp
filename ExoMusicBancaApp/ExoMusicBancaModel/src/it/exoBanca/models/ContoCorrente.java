@@ -4,25 +4,27 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
+import javax.json.bind.annotation.JsonbDateFormat;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="conto_corrente")
-public class ContoCorrente implements Serializable{
+@Table(name = "conto_corrente")
+public class ContoCorrente implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@Column(name="numero_conto")
+	@Column(name = "numero_conto")
 	private String numeroConto;
 
-	@Column(name="data_scadenza")
+	@Column(name = "data_scadenza")
+	@JsonbDateFormat
 	private LocalDateTime dataScadenza;
 
-	@Column(name="saldo")
+	@Column(name = "saldo")
 	private Float saldo;
 
 	public String getNumeroConto() {
