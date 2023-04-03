@@ -8,16 +8,16 @@ import javax.ejb.Stateless;
 import it.exoBanca.ejbInterfaces.AnagraficaControllerInterface;
 import it.exoBanca.models.Anagrafica;
 import it.exolab.costanti.Const;
-import it.exolab.utility.CodiceFiscaleUtility;
 
-@Stateless(name="AnagraficaControllerInterface")
+@Stateless(name = "AnagraficaControllerInterface")
 @LocalBean
-public class AnagraficaEJB extends BaseEJB<Anagrafica> implements AnagraficaControllerInterface{
+public class AnagraficaEJB extends BaseEJB<Anagrafica> implements AnagraficaControllerInterface {
 
 	@Override
 	public Anagrafica insert(Anagrafica model) {
 		// TODO Auto-generated method stub
-		return CodiceFiscaleUtility.check(model) ? super.insert(model) : null;
+//		return CodiceFiscaleUtility.check(model) ? super.insert(model) : null;
+		return super.insert(model);
 	}
 
 	@Override
