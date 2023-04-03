@@ -32,8 +32,7 @@ public class UtenteRest extends BaseRest<Utente> {
 		logger.info("sei nel UtenteRest insert >>>" + utente);
 		try {
 			utente = new EJBFactory<UtenteControllerInterface>(UtenteControllerInterface.class).getEJB().insert(utente);
-			return Response.status(201).entity(utente).build();
-
+			return getStandardResponse(utente).build();
 		} catch (Exception e) {
 			e.printStackTrace();
 			return Response.status(500).build();
@@ -49,7 +48,7 @@ public class UtenteRest extends BaseRest<Utente> {
 		logger.info("sei nel UtenteRest update >>>" + utente);
 		try {
 			utente = new EJBFactory<UtenteControllerInterface>(UtenteControllerInterface.class).getEJB().update(utente);
-			return Response.status(201).entity(utente).build();
+			return getStandardResponse(utente).build();
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -66,7 +65,7 @@ public class UtenteRest extends BaseRest<Utente> {
 		try {
 			Utente utente = new EJBFactory<UtenteControllerInterface>(UtenteControllerInterface.class).getEJB()
 					.findById(idUtente);
-			return Response.status(201).entity(utente).build();
+			return getStandardResponse(utente).build();
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -83,7 +82,7 @@ public class UtenteRest extends BaseRest<Utente> {
 		try {
 			List<Utente> listaUtenti = new EJBFactory<UtenteControllerInterface>(UtenteControllerInterface.class)
 					.getEJB().findAll();
-			return Response.status(201).entity(listaUtenti).build();
+			return getStandardResponse(listaUtenti).build();
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -99,8 +98,7 @@ public class UtenteRest extends BaseRest<Utente> {
 		logger.info("sei nel UtenteRest delete >>>" + utente);
 		try {
 			new EJBFactory<UtenteControllerInterface>(UtenteControllerInterface.class).getEJB().delete(utente);
-			;
-			return Response.status(202).build();
+			return getStandardResponse(202).build();
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -118,7 +116,7 @@ public class UtenteRest extends BaseRest<Utente> {
 			utente = new EJBFactory<UtenteControllerInterface>(UtenteControllerInterface.class).getEJB()
 					.findByEmailPassword(utente);
 			if (null != utente) {
-				return Response.status(201).entity(utente).build();
+				return getStandardResponse(utente).build();
 			} else {
 				return Response.status(400).entity(utente).build();
 			}

@@ -49,7 +49,7 @@ public class Anagrafica implements Serializable{
 
 	}
 
-	public Anagrafica(Integer idAnagrafica, String nome, String cognome, String codiceFiscale, String luogoNascita,String provincia, Character sesso) {
+	public Anagrafica(Integer idAnagrafica, String nome, String cognome, String codiceFiscale, String luogoNascita,String provincia,LocalDateTime dataNascita, Character sesso) {
 		super();
 		this.idAnagrafica = idAnagrafica;
 		this.nome = nome;
@@ -58,6 +58,7 @@ public class Anagrafica implements Serializable{
 		this.luogoNascita = luogoNascita;
 		this.provincia = provincia;
 		this.sesso = sesso;
+		this.dataNascita = dataNascita;
 	}
 
 

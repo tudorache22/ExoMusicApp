@@ -1,6 +1,11 @@
 package it.exoBanca.rest;
 
+import java.util.List;
+
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.ResponseBuilder;
+
+import org.jboss.resteasy.spi.CorsHeaders;
 
 public abstract class BaseRest<T> {
 
@@ -13,5 +18,25 @@ public abstract class BaseRest<T> {
 	abstract Response findAll();
 
 	abstract Response delete(T model);
+
+	protected ResponseBuilder getStandardResponse(T entity) {
+		ResponseBuilder response = Response.status(201);
+		return response.entity(entity)
+				.header(CorsHeaders.ACCESS_CONTROL_ALLOW_ORIGIN,"*")
+				.header(CorsHeaders.ACCESS_CONTROL_ALLOW_METHODS, "POST,PUT,DELETE,GET");
+	}
+	protected ResponseBuilder getStandardResponse(List<T> entity) {
+		ResponseBuilder response = Response.status(201);
+		return response.entity(entity)
+				.header(CorsHeaders.ACCESS_CONTROL_ALLOW_ORIGIN,"*")
+				.header(CorsHeaders.ACCESS_CONTROL_ALLOW_METHODS, "POST,PUT,DELETE,GET");
+	}
+	protected ResponseBuilder getStandardResponse(Integer statusCode) {
+		ResponseBuilder response = Response.status(statusCode);
+		return response.header(CorsHeaders.ACCESS_CONTROL_ALLOW_ORIGIN,"*")
+				.header(CorsHeaders.ACCESS_CONTROL_ALLOW_METHODS, "POST,PUT,DELETE,GET");
+	}
+
+
 
 }

@@ -12,4 +12,16 @@ public interface Const {
 	public static final String TABELLA_UTENTE = "utente";
 
 	public static final String QUERY_LOGIN = "SELECT * FROM utente WHERE email = :placeEmail: AND password = :placePassword:";
+
+	public static final String PREFISSO_IT = "IT";
+	public static final String PREFISSO_EE = "EE";
+
+	public static final String CHARS_FOR_CONTO_CORRENTE_1 = "EFGNETUVBASZHIXOPQLMAJRKWBCDCDY";
+	public static final String CHARS_FOR_CONTO_CORRENTE_2 = "FGXSZHIYXYWEKJKNUVTBAPQOCLMRDWZ";
+	public static final String CHARS_FOR_CONTO_CORRENTE_3 = "NFGOPQHIRLMJ";
+
+	public static final String ALLOW_ORIGIN = "Access-Control-Allow-Origin";
+	public static final String ALLOW_METHODS = "Access-Control-Allow-Methods";
+
+	public static final String REACT_APP_URL = "http://localhost:3000";
 }
