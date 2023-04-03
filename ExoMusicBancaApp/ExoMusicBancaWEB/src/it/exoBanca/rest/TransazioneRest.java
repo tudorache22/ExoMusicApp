@@ -33,7 +33,7 @@ public class TransazioneRest extends BaseRest<Transazione> {
 		try {
 			transazione = new EJBFactory<TransazioneControllerInterface>(TransazioneControllerInterface.class).getEJB()
 					.insert(transazione);
-			return Response.status(201).entity(transazione).build();
+			return getStandardResponse(transazione).build();
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -51,7 +51,7 @@ public class TransazioneRest extends BaseRest<Transazione> {
 		try {
 			transazione = new EJBFactory<TransazioneControllerInterface>(TransazioneControllerInterface.class).getEJB()
 					.update(transazione);
-			return Response.status(201).entity(transazione).build();
+			return getStandardResponse(transazione).build();
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -68,7 +68,7 @@ public class TransazioneRest extends BaseRest<Transazione> {
 		try {
 			Transazione transazione = new EJBFactory<TransazioneControllerInterface>(
 					TransazioneControllerInterface.class).getEJB().findById(idTransazione);
-			return Response.status(201).entity(transazione).build();
+			return getStandardResponse(transazione).build();
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -85,7 +85,7 @@ public class TransazioneRest extends BaseRest<Transazione> {
 		try {
 			List<Transazione> listaTransazioni = new EJBFactory<TransazioneControllerInterface>(
 					TransazioneControllerInterface.class).getEJB().findAll();
-			return Response.status(201).entity(listaTransazioni).build();
+			return getStandardResponse(listaTransazioni).build();
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -103,7 +103,7 @@ public class TransazioneRest extends BaseRest<Transazione> {
 			new EJBFactory<TransazioneControllerInterface>(TransazioneControllerInterface.class).getEJB()
 					.delete(transazione);
 			;
-			return Response.status(202).build();
+			return getStandardResponse(202).build();
 
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -33,7 +33,7 @@ public class AnagraficaRest extends BaseRest<Anagrafica> {
 		try {
 			anagrafica = new EJBFactory<AnagraficaControllerInterface>(AnagraficaControllerInterface.class).getEJB()
 					.insert(anagrafica);
-			return Response.status(201).entity(anagrafica).build();
+			return getStandardResponse(anagrafica).build();
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -51,7 +51,7 @@ public class AnagraficaRest extends BaseRest<Anagrafica> {
 		try {
 			anagrafica = new EJBFactory<AnagraficaControllerInterface>(AnagraficaControllerInterface.class).getEJB()
 					.update(anagrafica);
-			return Response.status(201).entity(anagrafica).build();
+			return getStandardResponse(anagrafica).build();
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -68,7 +68,7 @@ public class AnagraficaRest extends BaseRest<Anagrafica> {
 		try {
 			Anagrafica anagrafica = new EJBFactory<AnagraficaControllerInterface>(AnagraficaControllerInterface.class)
 					.getEJB().findById(idAnagrafica);
-			return Response.status(201).entity(anagrafica).build();
+			return getStandardResponse(anagrafica).build();
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -83,9 +83,9 @@ public class AnagraficaRest extends BaseRest<Anagrafica> {
 	public Response findAll() {
 		logger.info("sei nel AnagraficaRest findAll >>>");
 		try {
-			List<Anagrafica> listaConti = new EJBFactory<AnagraficaControllerInterface>(
+			List<Anagrafica> listaAnagrafica = new EJBFactory<AnagraficaControllerInterface>(
 					AnagraficaControllerInterface.class).getEJB().findAll();
-			return Response.status(201).entity(listaConti).build();
+			return getStandardResponse(listaAnagrafica).build();
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -102,8 +102,7 @@ public class AnagraficaRest extends BaseRest<Anagrafica> {
 		try {
 			new EJBFactory<AnagraficaControllerInterface>(AnagraficaControllerInterface.class).getEJB()
 					.delete(anagrafica);
-			;
-			return Response.status(202).build();
+			return getStandardResponse(202).build();
 
 		} catch (Exception e) {
 			e.printStackTrace();

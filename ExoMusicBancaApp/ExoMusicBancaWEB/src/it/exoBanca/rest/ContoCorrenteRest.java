@@ -33,7 +33,7 @@ public class ContoCorrenteRest extends BaseRest<ContoCorrente> {
 		try {
 			contoCorrente = new EJBFactory<ContoCorrenteControllerInterface>(ContoCorrenteControllerInterface.class)
 					.getEJB().insert(contoCorrente);
-			return Response.status(201).entity(contoCorrente).build();
+			return getStandardResponse(contoCorrente).build();
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -51,7 +51,7 @@ public class ContoCorrenteRest extends BaseRest<ContoCorrente> {
 		try {
 			contoCorrente = new EJBFactory<ContoCorrenteControllerInterface>(ContoCorrenteControllerInterface.class)
 					.getEJB().update(contoCorrente);
-			return Response.status(201).entity(contoCorrente).build();
+			return getStandardResponse(contoCorrente).build();
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -68,7 +68,7 @@ public class ContoCorrenteRest extends BaseRest<ContoCorrente> {
 		try {
 			ContoCorrente contoCorrente = new EJBFactory<ContoCorrenteControllerInterface>(
 					ContoCorrenteControllerInterface.class).getEJB().findById(idContoCorrente);
-			return Response.status(201).entity(contoCorrente).build();
+			return getStandardResponse(contoCorrente).build();
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -85,7 +85,7 @@ public class ContoCorrenteRest extends BaseRest<ContoCorrente> {
 		try {
 			List<ContoCorrente> listaConti = new EJBFactory<ContoCorrenteControllerInterface>(
 					ContoCorrenteControllerInterface.class).getEJB().findAll();
-			return Response.status(201).entity(listaConti).build();
+			return getStandardResponse(listaConti).build();
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -103,7 +103,7 @@ public class ContoCorrenteRest extends BaseRest<ContoCorrente> {
 			new EJBFactory<ContoCorrenteControllerInterface>(ContoCorrenteControllerInterface.class).getEJB()
 					.delete(contoCorrente);
 			;
-			return Response.status(202).build();
+			return getStandardResponse(202).build();
 
 		} catch (Exception e) {
 			e.printStackTrace();

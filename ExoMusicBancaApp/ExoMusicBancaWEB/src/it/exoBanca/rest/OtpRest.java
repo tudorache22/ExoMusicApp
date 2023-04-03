@@ -33,7 +33,7 @@ public class OtpRest extends BaseRest<Otp> {
 		logger.info("sei nel OtpRest insert >>>" + otp);
 		try {
 			otp = new EJBFactory<OtpControllerInterface>(OtpControllerInterface.class).getEJB().insert(otp);
-			return Response.status(201).entity(otp).build();
+			return getStandardResponse(otp).build();
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -50,7 +50,7 @@ public class OtpRest extends BaseRest<Otp> {
 		logger.info("sei nel OtpRest update >>>" + otp);
 		try {
 			otp = new EJBFactory<OtpControllerInterface>(OtpControllerInterface.class).getEJB().update(otp);
-			return Response.status(201).entity(otp).build();
+			return getStandardResponse(otp).build();
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -66,7 +66,7 @@ public class OtpRest extends BaseRest<Otp> {
 		logger.info("sei nel OtpRest findById >>>" + idOtp);
 		try {
 			Otp otp = new EJBFactory<OtpControllerInterface>(OtpControllerInterface.class).getEJB().findById(idOtp);
-			return Response.status(201).entity(otp).build();
+			return getStandardResponse(otp).build();
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -83,7 +83,7 @@ public class OtpRest extends BaseRest<Otp> {
 		try {
 			List<Otp> listaOtp = new EJBFactory<OtpControllerInterface>(OtpControllerInterface.class).getEJB()
 					.findAll();
-			return Response.status(201).entity(listaOtp).build();
+			return getStandardResponse(listaOtp).build();
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -100,7 +100,7 @@ public class OtpRest extends BaseRest<Otp> {
 		try {
 			new EJBFactory<OtpControllerInterface>(OtpControllerInterface.class).getEJB().delete(otp);
 			;
-			return Response.status(202).build();
+			return getStandardResponse(202).build();
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -117,8 +117,8 @@ public class OtpRest extends BaseRest<Otp> {
 		try {
 			Otp otp = new EJBFactory<OtpControllerInterface>(OtpControllerInterface.class).getEJB().nuovoOtp(transazione);
 //			new EmailFactory().invioEmailStandard(utente, otp);
-			System.out.println("email inviata");
-			return Response.status(201).entity(otp.getCodice()).build();
+//			System.out.println("email inviata");
+			return getStandardResponse(201).entity(otp.getCodice()).build();
 
 		} catch (Exception e) {
 			e.printStackTrace();
