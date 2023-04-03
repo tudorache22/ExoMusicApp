@@ -22,28 +22,25 @@ public abstract class BaseRest<T> {
 	private final String ACCEPT_ALL = "*";
 	private final String CONTENT_TYPE = "Content-type";
 
+	private ResponseBuilder setHeader(ResponseBuilder response) {
+		return response.header(CorsHeaders.ACCESS_CONTROL_ALLOW_ORIGIN,ACCEPT_ALL)
+		.header(CorsHeaders.ACCESS_CONTROL_ALLOW_METHODS, "POST,PUT,DELETE,GET")
+		.header(CorsHeaders.ACCESS_CONTROL_ALLOW_HEADERS, CONTENT_TYPE);
+
+	}
+
 	protected ResponseBuilder getStandardResponse(T entity) {
 		ResponseBuilder response = Response.status(201);
-		return response.entity(entity)
-				.header(CorsHeaders.ACCESS_CONTROL_ALLOW_ORIGIN,ACCEPT_ALL)
-				.header(CorsHeaders.ACCESS_CONTROL_ALLOW_METHODS, "POST,PUT,DELETE,GET")
-				.header(CorsHeaders.ACCESS_CONTROL_ALLOW_HEADERS, CONTENT_TYPE);
+		return setHeader(response).entity(entity);
 
 	}
 	protected ResponseBuilder getStandardResponse(List<T> entity) {
 		ResponseBuilder response = Response.status(201);
-		return response.entity(entity)
-				.header(CorsHeaders.ACCESS_CONTROL_ALLOW_ORIGIN,ACCEPT_ALL)
-				.header(CorsHeaders.ACCESS_CONTROL_ALLOW_METHODS, "POST,PUT,DELETE,GET")
-				.header(CorsHeaders.ACCESS_CONTROL_ALLOW_HEADERS, CONTENT_TYPE);
+		return setHeader(response).entity(entity);
 	}
 	protected ResponseBuilder getStandardResponse(Integer statusCode) {
 		ResponseBuilder response = Response.status(statusCode);
-		return response.header(CorsHeaders.ACCESS_CONTROL_ALLOW_ORIGIN,ACCEPT_ALL)
-				.header(CorsHeaders.ACCESS_CONTROL_ALLOW_METHODS, "POST,PUT,DELETE,GET")
-				.header(CorsHeaders.ACCESS_CONTROL_ALLOW_HEADERS, CONTENT_TYPE);
+		return setHeader(response);
 	}
-
-
 
 }
