@@ -11,20 +11,20 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="conto_corrente")
-public class ContoCorrente implements Serializable{
+@Table(name = "conto_corrente")
+public class ContoCorrente implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@Column(name="numero_conto")
+	@Column(name = "numero_conto")
 	private String numeroConto;
 
 	@Column(name="data_scadenza")
 	@JsonbDateFormat(value="YYYY-MM-DD")
 	private LocalDate dataScadenza;
 
-	@Column(name="saldo")
+	@Column(name = "saldo")
 	private Float saldo;
 
 	public String getNumeroConto() {

@@ -41,6 +41,7 @@
         <version>3.0.2</version>
         <configuration>
           <earSourceDirectory>EarContent</earSourceDirectory>
+          <generateApplicationXml>false</generateApplicationXml>
           <version>8</version>
           <defaultLibBundleDir>lib</defaultLibBundleDir>
           <modules>
