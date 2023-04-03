@@ -13,8 +13,8 @@ const Register = () => {
     const [provincia, setProvincia] = useState("");
     const [dataNascita, setDataNascita] = useState("");
     const [sesso, setSesso] = useState("");
-    const URIanagrafica = "http://localhost:8080/insertAnagrafica";
-    const URIutente = "http://localhost:8080/register";
+    const URIanagrafica = "http://localhost:8080/ExoMusicBancaWEB-0.0.1-SNAPSHOT/rest/AnagraficaRest/insertAnagrafica";
+    const URIutente = "http://localhost:8080/ExoMusicBancaWEB-0.0.1-SNAPSHOT/rest/UtenteRest/insertUtente";
 
     const utenteContext = useContext(UtenteContext);
     const connessoContext = useContext(ConnessoContext);
@@ -33,9 +33,11 @@ const Register = () => {
             codiceFiscale: codiceFiscale,
             luogoNascita: luogoNascita,
             provincia: provincia,
-            dataNascita: dataNascita,
+            // dataNascita: dataNascita,
             sesso: sesso
         }
+
+        console.log(requestBody);
 
         fetch(URIanagrafica, {
             method: "POST",
@@ -50,18 +52,19 @@ const Register = () => {
                 console.log(response);
                 if (null != response) {
                     anagraficaContext.setAnagrafica(response);
-                    console.log("prova utente");
+                    saveUtente(response)
                 }
             }).catch(error => {
                 console.error(error);
             })
     }
 
-    function saveUtente() {
+    function saveUtente(anagraficaResponse) {
+        console.log(anagraficaResponse);
         let requestBody = {
             email: email,
             password: password,
-            anagrafica: anagraficaContext.anagrafica
+            anagrafica: anagraficaResponse
         }
         console.log("corso 2")
         console.log(requestBody);
@@ -113,7 +116,7 @@ const Register = () => {
                 <option value="F">F</option>
             </select>
 
-            <button type="button" className="btn btn-outline-danger" onClick={() => { saveUtente() }} >Registrati</button>
+            <button type="button" className="btn btn-outline-danger" onClick={() => saveAnagrafica()} >Registrati</button>
             <label for="bottoneLogin">Hai già un account?</label>
             <button type="button" className="btn btn-outline-danger" onClick={() => navigate("/login")}> Accedi</button>
         </form>

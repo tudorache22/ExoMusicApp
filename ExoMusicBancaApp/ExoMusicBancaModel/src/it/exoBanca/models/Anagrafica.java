@@ -18,7 +18,7 @@ public class Anagrafica implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id_anagrafica")
 	private Integer idAnagrafica;
 
@@ -34,8 +34,8 @@ public class Anagrafica implements Serializable {
 	@Column(name = "luogo_nascita")
 	private String luogoNascita;
 
-	@Column(name="data_nascita")
-	@JsonbDateFormat(value="YYYY-MM-DD")
+	@Column(name = "data_nascita")
+	@JsonbDateFormat(value = "YYYY-MM-DD")
 	private LocalDate dataNascita;
 
 	@Column(name = "provincia")
@@ -51,7 +51,8 @@ public class Anagrafica implements Serializable {
 
 	}
 
-	public Anagrafica(Integer idAnagrafica, String nome, String cognome, String codiceFiscale, String luogoNascita,String provincia,LocalDate dataNascita, Character sesso) {
+	public Anagrafica(Integer idAnagrafica, String nome, String cognome, String codiceFiscale, String luogoNascita,
+			String provincia, LocalDate dataNascita, Character sesso) {
 
 		super();
 		this.idAnagrafica = idAnagrafica;

@@ -9,6 +9,7 @@ import Footer from './Footer/Footer';
 export const UtenteContext = createContext();
 export const ConnessoContext = createContext();
 export const AnagraficaContext = createContext();
+export const ContoCorrenteContext = createContext();
 
 function App() {
 
@@ -33,6 +34,12 @@ function App() {
 
   const [connesso, setConnesso] = useState(false);
 
+  const [contoCorrente, setContoCorrente] = useState({
+    numeroConto: "",
+    dataScadenza: "",
+    saldo: ""
+  })
+
   const connessoContext = {
     connesso: connesso,
     setConnesso: setConnesso
@@ -48,24 +55,31 @@ function App() {
     setUtente: setUtente
   };
 
+  const contoCorrenteContext = {
+    contoCorrente: contoCorrente,
+    setContoCorrente: setContoCorrente
+  }
+
 
   return (
     <div className='row'>
       <UtenteContext.Provider value={utenteContext}>
         <AnagraficaContext.Provider value={anagraficaContext}>
           <ConnessoContext.Provider value={connessoContext}>
-            <div className='col-12'>
-              <Header />
-            </div>
-            <div className='col-12'>
-              <NavBar />
-            </div>
-            <div className='col-12'>
-              <Main />
-            </div>
-            <div className='col-12'>
-              <Footer />
-            </div>
+            <ContoCorrenteContext.Provider value={contoCorrenteContext}>
+              <div className='col-12'>
+                <Header />
+              </div>
+              <div className='col-12'>
+                <NavBar />
+              </div>
+              <div className='col-12'>
+                <Main />
+              </div>
+              <div className='col-12'>
+                <Footer />
+              </div>
+            </ContoCorrenteContext.Provider>
           </ConnessoContext.Provider>
         </AnagraficaContext.Provider>
       </UtenteContext.Provider>
