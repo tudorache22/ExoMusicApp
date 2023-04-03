@@ -20,8 +20,5 @@ public interface Const {
 	public static final String CHARS_FOR_CONTO_CORRENTE_2 = "FGXSZHIYXYWEKJKNUVTBAPQOCLMRDWZ";
 	public static final String CHARS_FOR_CONTO_CORRENTE_3 = "NFGOPQHIRLMJ";
 
-	public static final String ALLOW_ORIGIN = "Access-Control-Allow-Origin";
-	public static final String ALLOW_METHODS = "Access-Control-Allow-Methods";
-
-	public static final String REACT_APP_URL = "http://localhost:3000";
+	public static final String[] CODICE_FISCALE_LETTERA_MESE = {"A","B","C","D","E","H","L","M","P","R","S","T"};
 }

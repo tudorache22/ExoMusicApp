@@ -17,6 +17,8 @@ public abstract class BaseEJB<T> {
 	private final EntityManager entityManager = entityManagerFactory.createEntityManager();
 	private EntityTransaction transaction;
 
+	protected Operations operations = new Operations(entityManager);
+
 	public T insert(T model) {
 		transaction = entityManager.getTransaction();
 

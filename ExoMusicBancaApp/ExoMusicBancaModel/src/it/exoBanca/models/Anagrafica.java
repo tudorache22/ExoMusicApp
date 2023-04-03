@@ -1,9 +1,10 @@
 package it.exoBanca.models;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.Objects;
 
+import javax.json.bind.annotation.JsonbDateFormat;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -34,7 +35,8 @@ public class Anagrafica implements Serializable{
 	private String luogoNascita;
 
 	@Column(name="data_nascita")
-	private LocalDateTime dataNascita;
+	@JsonbDateFormat(value="YYYY-MM-DD")
+	private LocalDate dataNascita;
 
 	@Column(name="provincia")
 	private String provincia;
@@ -49,7 +51,7 @@ public class Anagrafica implements Serializable{
 
 	}
 
-	public Anagrafica(Integer idAnagrafica, String nome, String cognome, String codiceFiscale, String luogoNascita,String provincia,LocalDateTime dataNascita, Character sesso) {
+	public Anagrafica(Integer idAnagrafica, String nome, String cognome, String codiceFiscale, String luogoNascita,String provincia,LocalDate dataNascita, Character sesso) {
 		super();
 		this.idAnagrafica = idAnagrafica;
 		this.nome = nome;
@@ -106,11 +108,11 @@ public class Anagrafica implements Serializable{
 		this.sesso = sesso;
 	}
 
-	public LocalDateTime getDataNascita() {
+	public LocalDate getDataNascita() {
 		return dataNascita;
 	}
 
-	public void setDataNascita(LocalDateTime dataNascita) {
+	public void setDataNascita(LocalDate dataNascita) {
 		this.dataNascita = dataNascita;
 	}
 

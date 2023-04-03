@@ -16,7 +16,10 @@ import org.apache.log4j.Logger;
 
 import it.exoBanca.conf.EJBFactory;
 import it.exoBanca.ejbInterfaces.ContoCorrenteControllerInterface;
+import it.exoBanca.ejbInterfaces.UtenteControllerInterface;
 import it.exoBanca.models.ContoCorrente;
+import it.exoBanca.models.Utente;
+import it.exolab.utility.ContoCorrenteUtility;
 
 @Path("/ContoCorrenteRest")
 public class ContoCorrenteRest extends BaseRest<ContoCorrente> {
@@ -61,13 +64,15 @@ public class ContoCorrenteRest extends BaseRest<ContoCorrente> {
 
 	@Override
 	@GET
-	@Path("/findContoCorrenteById/{idContoCorrente}")
+	@Path("/findByIdUtente/{idUtente}")
 	@Produces({ "application/json" })
-	public Response findById(@PathParam("idContoCorrente") Integer idContoCorrente) {
-		logger.info("sei nel ContoCorrenteRest findById >>>" + idContoCorrente);
+	public Response findById(@PathParam("idUtente") Integer idUtente) {
+		logger.info("sei nel ContoCorrenteRest findByIdUtente >>>" + idUtente);
 		try {
-			ContoCorrente contoCorrente = new EJBFactory<ContoCorrenteControllerInterface>(
-					ContoCorrenteControllerInterface.class).getEJB().findById(idContoCorrente);
+			Utente utente = new EJBFactory<UtenteControllerInterface>(UtenteControllerInterface.class).getEJB().findById(idUtente);
+
+			ContoCorrente contoCorrente = new EJBFactory<ContoCorrenteControllerInterface>(ContoCorrenteControllerInterface.class)
+					.getEJB().findByNumeroConto(ContoCorrenteUtility.getNumeroConto(utente.getAnagrafica()));
 			return getStandardResponse(contoCorrente).build();
 
 		} catch (Exception e) {

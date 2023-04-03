@@ -1,9 +1,10 @@
 package it.exoBanca.models;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.Objects;
 
+import javax.json.bind.annotation.JsonbDateFormat;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -20,7 +21,8 @@ public class ContoCorrente implements Serializable{
 	private String numeroConto;
 
 	@Column(name="data_scadenza")
-	private LocalDateTime dataScadenza;
+	@JsonbDateFormat(value="YYYY-MM-DD")
+	private LocalDate dataScadenza;
 
 	@Column(name="saldo")
 	private Float saldo;
@@ -33,11 +35,11 @@ public class ContoCorrente implements Serializable{
 		this.numeroConto = numeroConto;
 	}
 
-	public LocalDateTime getDataScadenza() {
+	public LocalDate getDataScadenza() {
 		return dataScadenza;
 	}
 
-	public void setDataScadenza(LocalDateTime dataScadenza) {
+	public void setDataScadenza(LocalDate dataScadenza) {
 		this.dataScadenza = dataScadenza;
 	}
 

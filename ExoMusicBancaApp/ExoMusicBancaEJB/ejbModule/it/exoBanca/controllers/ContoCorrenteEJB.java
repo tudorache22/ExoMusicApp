@@ -32,9 +32,20 @@ public class ContoCorrenteEJB extends BaseEJB<ContoCorrente> implements ContoCor
 	}
 
 	@Override
-	public ContoCorrente findById(Integer numeroConto) {
-		// TODO Auto-generated method stub
-		return super.findById(ContoCorrente.class, numeroConto);
+	public ContoCorrente findByNumeroConto(String numeroConto) {
+		try {
+			getEntityManager().getTransaction().begin();
+			ContoCorrente contoCorrente = getEntityManager().find(ContoCorrente.class, numeroConto);
+			getEntityManager().getTransaction().commit();
+			return contoCorrente;
+		}catch(Exception e) {
+			e.printStackTrace();
+			getEntityManager().getTransaction().rollback();
+		} finally {
+			getEntityManager().close();
+		}
+
+		return null;
 	}
 
 	@Override

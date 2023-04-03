@@ -1,19 +1,32 @@
 package it.exolab.utility;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 import it.exoBanca.models.Anagrafica;
+import it.exoBanca.models.ContoCorrente;
 import it.exolab.costanti.Const;
 
 public class ContoCorrenteUtility {
 
 	private final String voidString = "";
 
-	public static String getNumeroConto(Anagrafica anagrafica) {
-		return new ContoCorrenteUtility().generaContoCorrenteByAnagrafica(anagrafica);
+	public static ContoCorrente getContoCorrente(Anagrafica anagrafica) {
+		return getContoCorrente(anagrafica,0f,LocalDate.now().plusYears(10));
 	}
 
-	private String generaContoCorrenteByAnagrafica(Anagrafica anagrafica) {
+	public static ContoCorrente getContoCorrente(Anagrafica anagrafica,Float saldo,LocalDate data) {
+		ContoCorrente contoCorrente = new ContoCorrente();
+		contoCorrente.setSaldo(saldo);
+		contoCorrente.setDataScadenza(data);
+		contoCorrente.setNumeroConto(getNumeroConto(anagrafica));
+		return contoCorrente;
+	}
+
+	public static String getNumeroConto(Anagrafica anagrafica) {
+		return new ContoCorrenteUtility().generaNumeroContoByAnagrafica(anagrafica);
+	}
+
+	private String generaNumeroContoByAnagrafica(Anagrafica anagrafica) {
 		int hashCodeId = Math.abs(anagrafica.getIdAnagrafica().hashCode());
 		int hashCodeCognome = Math.abs(anagrafica.getCognome().hashCode());
 		int hashCodeNascita = Math.abs(anagrafica.getLuogoNascita().hashCode());
@@ -37,7 +50,7 @@ public class ContoCorrenteUtility {
 		return result;
 	}
 
-	private String getSuffissoConto(LocalDateTime data) {
+	private String getSuffissoConto(LocalDate data) {
 		char random_1 = Const.CHARS_FOR_CONTO_CORRENTE_1.charAt(data.getDayOfMonth());
 		char random_2 = Const.CHARS_FOR_CONTO_CORRENTE_2.charAt(data.getDayOfMonth());
 		char random_3 = Const.CHARS_FOR_CONTO_CORRENTE_3.charAt(data.getMonthValue());

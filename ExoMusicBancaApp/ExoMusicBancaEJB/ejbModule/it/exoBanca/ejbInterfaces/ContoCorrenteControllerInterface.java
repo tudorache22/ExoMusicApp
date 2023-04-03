@@ -15,7 +15,7 @@ public interface ContoCorrenteControllerInterface {
 
 	void delete(ContoCorrente contoCorrente);
 
-	ContoCorrente findById(Integer idContoCorrente);
+	ContoCorrente findByNumeroConto(String numeroConto);
 
 	List<ContoCorrente> findAll();
 }

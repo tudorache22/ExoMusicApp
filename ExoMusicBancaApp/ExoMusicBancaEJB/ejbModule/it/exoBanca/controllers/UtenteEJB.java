@@ -15,32 +15,64 @@ import it.exolab.costanti.Const;
 public class UtenteEJB extends BaseEJB<Utente> implements UtenteControllerInterface{
 
 	@Override
-	public Utente insert(Utente model) {
-		// TODO Auto-generated method stub
-		return super.insert(model);
+	public Utente insert(Utente utente) {
+		try {
+			getEntityManager().getTransaction().begin();
+			getEntityManager().persist(getEntityManager().contains(utente) ? utente : getEntityManager().merge(utente));
+			operations.insertContoCorrente(utente);
+			getEntityManager().getTransaction().commit();
+			return utente;
+		} catch (Exception e) {
+			e.printStackTrace();
+			getEntityManager().getTransaction().rollback();
+		} finally {
+			getEntityManager().close();
+		}
+		return null;
+
 	}
 
 	@Override
-	public Utente update(Utente model) {
-		// TODO Auto-generated method stub
-		return super.update(model);
+	public Utente update(Utente utente) {
+
+		try {
+			getEntityManager().getTransaction().begin();
+			Utente oldUser = findById(utente.getIdUtente());
+			operations.updateContoCorrente(oldUser, utente);
+			getEntityManager().getTransaction().commit();
+			return utente;
+		} catch (Exception e) {
+			e.printStackTrace();
+			getEntityManager().getTransaction().rollback();
+		} finally {
+			getEntityManager().close();
+		}
+		return null;
 	}
 
 	@Override
-	public void delete(Utente model) {
-		// TODO Auto-generated method stub
-		super.delete(model);
+	public void delete(Utente utente) {
+		try {
+			getEntityManager().getTransaction().begin();
+			getEntityManager().remove(getEntityManager().contains(utente) ? utente : getEntityManager().merge(utente));
+			operations.deleteContoCorrente(utente);
+			getEntityManager().getTransaction().commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+			getEntityManager().getTransaction().rollback();
+		} finally {
+			getEntityManager().flush();
+			getEntityManager().close();
+		}
 	}
 
 	@Override
 	public Utente findById(Integer id) {
-		// TODO Auto-generated method stub
 		return super.findById(Utente.class, id);
 	}
 
 	@Override
 	public List<Utente> findAll() {
-		// TODO Auto-generated method stub
 		return super.findAll(Const.TABELLA_UTENTE);
 	}
 
