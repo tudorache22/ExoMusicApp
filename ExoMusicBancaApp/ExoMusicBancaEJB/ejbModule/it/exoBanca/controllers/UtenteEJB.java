@@ -87,7 +87,6 @@ public class UtenteEJB extends BaseEJB<Utente> implements UtenteControllerInterf
 			getEntityManager().getTransaction().begin();
 			Query query = getEntityManager().createNativeQuery(Const.QUERY_LOGIN
 					.replace(":placeEmail:", utente.getEmail()).replace(":placePassword:", utente.getPassword()),Utente.class);
-			query.unwrap(org.hibernate.Query.class);
 			Utente utenteLogin = (Utente) query.getSingleResult();
 			getEntityManager().getTransaction().commit();
 			return utenteLogin;

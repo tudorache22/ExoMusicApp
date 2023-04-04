@@ -27,6 +27,7 @@ const Login = () => {
             email: email,
             password: password
         }
+        console.log(requestBody);
         fetch(URI, {
             method: "POST",
             body: JSON.stringify(requestBody),
@@ -37,8 +38,16 @@ const Login = () => {
             .then(responseJson => responseJson.json())
             .then(response => {
                 if (null !== response && response !== "") {
+<<<<<<< HEAD
                     log(response);
                     navigate("/home")
+=======
+                    connessoContext.setConnesso(true);
+                    console.log(response)
+                    console.log(connessoContext.connesso)
+                    utenteContext.setUtente(response);
+                    console.log(utenteContext.utente);
+>>>>>>> e7903ff8abd542778dd20b9e914c867e9811a23f
                 }
 
             }).catch(error => {
@@ -68,11 +77,11 @@ const Login = () => {
             <input type="text" placeholder="Inserisc la tua email" id="emailLogin" value={email} onChange={(e) => setEmail(e.target.value)} />
             <label for="passwordLogin">Password:</label>
             <input type="text" placeholder="Inserisci la password" id="passwordLogin" value={password} onChange={(e) => setPassword(e.target.value)} />
-            <button type="button" className="btn btn-outline-danger" onClick={() => saveUtente()}>Accedi</button>
+            <button type="button" className="btn btn-outline-danger" onClick={() => { saveUtente(); navigate("/home") }}>Accedi</button>
             <button type="button" className="btn btn-outline-danger" onClick={() => provaGet()}>prova</button>
 
             <label for="">Non hai un account?</label>
-            <button type="button" className="btn btn-outline-danger" onClick={() => navigate("/register")}>Registrati</button>
+            <button type="button" className="btn btn-outline-danger" onClick={() => navigate("/anagrafica")}>Crea un account</button>
         </form >
     )
 

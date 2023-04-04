@@ -34,9 +34,11 @@ public class UtenteRest extends BaseRest<Utente> {
 	public Response insert(Utente utente) {
 		logger.info("sei nel UtenteRest insert >>>" + utente);
 		try {
+			System.out.println(utente);
 			utente = new EJBFactory<UtenteControllerInterface>(UtenteControllerInterface.class).getEJB().insert(utente);
 			ContoCorrente conto = ContoCorrenteUtility.getContoCorrente(utente.getAnagrafica());
-			new EJBFactory<ContoCorrenteControllerInterface>(ContoCorrenteControllerInterface.class).getEJB().insert(conto);
+			new EJBFactory<ContoCorrenteControllerInterface>(ContoCorrenteControllerInterface.class).getEJB()
+					.insert(conto);
 			return getStandardResponse(utente).build();
 		} catch (Exception e) {
 			e.printStackTrace();
