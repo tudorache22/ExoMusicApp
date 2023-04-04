@@ -11,7 +11,7 @@ public interface Const {
 	public static final String TABELLA_TRANSAZIONE = "transazione";
 	public static final String TABELLA_UTENTE = "utente";
 
-	public static final String QUERY_LOGIN = "SELECT * FROM utente WHERE email = :placeEmail: AND password = :placePassword:";
+	public static final String QUERY_LOGIN = "SELECT * FROM utente WHERE email = ':placeEmail:' AND password = ':placePassword:'";
 
 	public static final String PREFISSO_IT = "IT";
 	public static final String PREFISSO_EE = "EE";

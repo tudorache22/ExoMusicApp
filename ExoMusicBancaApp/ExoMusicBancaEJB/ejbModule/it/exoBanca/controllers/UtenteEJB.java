@@ -19,7 +19,8 @@ public class UtenteEJB extends BaseEJB<Utente> implements UtenteControllerInterf
 		try {
 			createEntityManager();
 			getEntityManager().getTransaction().begin();
-			getEntityManager().persist(getEntityManager().contains(utente) ? utente : getEntityManager().merge(utente));
+			if(null != utente)
+				getEntityManager().persist(getEntityManager().contains(utente) ? utente : getEntityManager().merge(utente));
 			System.out.println(utente);
 //			operations.insertContoCorrente(utente);
 			getEntityManager().getTransaction().commit();
@@ -87,11 +88,10 @@ public class UtenteEJB extends BaseEJB<Utente> implements UtenteControllerInterf
 			createEntityManager();
 			getEntityManager().getTransaction().begin();
 			Query query = getEntityManager().createNativeQuery(Const.QUERY_LOGIN
-					.replace(":placeEmail:", utente.getEmail()).replace(":placePassword:", utente.getPassword()));
-
-			Utente model = (Utente) query.getSingleResult();
+					.replace(":placeEmail:", utente.getEmail()).replace(":placePassword:", utente.getPassword()),Utente.class);
+			Utente utenteLogin = (Utente) query.getSingleResult();
 			getEntityManager().getTransaction().commit();
-			return model;
+			return utenteLogin;
 		}catch(Exception e) {
 			e.printStackTrace();
 			getEntityManager().getTransaction().rollback();
