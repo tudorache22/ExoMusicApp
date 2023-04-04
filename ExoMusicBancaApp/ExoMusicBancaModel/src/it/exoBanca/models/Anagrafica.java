@@ -38,9 +38,6 @@ public class Anagrafica implements Serializable {
 	@Column(name="data_nascita")
 	private Date dataNascita;
 
-	@Column(name="id_utente")
-	private Integer idUtente;
-
 	@Column(name="luogo_nascita")
 	private String luogoNascita;
 
@@ -93,14 +90,6 @@ public class Anagrafica implements Serializable {
 		this.dataNascita = dataNascita;
 	}
 
-	public Integer getIdUtente() {
-		return this.idUtente;
-	}
-
-	public void setIdUtente(Integer idUtente) {
-		this.idUtente = idUtente;
-	}
-
 	public String getLuogoNascita() {
 		return this.luogoNascita;
 	}
@@ -143,7 +132,7 @@ public class Anagrafica implements Serializable {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(codiceFiscale, cognome, dataNascita, idAnagrafica, idUtente, luogoNascita, nome, provincia,
+		return Objects.hash(codiceFiscale, cognome, dataNascita, idAnagrafica, luogoNascita, nome, provincia,
 				sesso, utente);
 	}
 
@@ -158,7 +147,7 @@ public class Anagrafica implements Serializable {
 		Anagrafica other = (Anagrafica) obj;
 		return Objects.equals(codiceFiscale, other.codiceFiscale) && Objects.equals(cognome, other.cognome)
 				&& Objects.equals(dataNascita, other.dataNascita) && Objects.equals(idAnagrafica, other.idAnagrafica)
-				&& Objects.equals(idUtente, other.idUtente) && Objects.equals(luogoNascita, other.luogoNascita)
+				&& Objects.equals(luogoNascita, other.luogoNascita)
 				&& Objects.equals(nome, other.nome) && Objects.equals(provincia, other.provincia)
 				&& Objects.equals(sesso, other.sesso) && Objects.equals(utente, other.utente);
 	}
@@ -166,7 +155,7 @@ public class Anagrafica implements Serializable {
 	@Override
 	public String toString() {
 		return "Anagrafica [idAnagrafica=" + idAnagrafica + ", codiceFiscale=" + codiceFiscale + ", cognome=" + cognome
-				+ ", dataNascita=" + dataNascita + ", idUtente=" + idUtente + ", luogoNascita=" + luogoNascita
+				+ ", dataNascita=" + dataNascita + ", luogoNascita=" + luogoNascita
 				+ ", nome=" + nome + ", provincia=" + provincia + ", sesso=" + sesso + ", utente=" + utente + "]";
 	}
 
