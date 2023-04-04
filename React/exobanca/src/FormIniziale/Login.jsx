@@ -38,16 +38,9 @@ const Login = () => {
             .then(responseJson => responseJson.json())
             .then(response => {
                 if (null !== response && response !== "") {
-<<<<<<< HEAD
+
                     log(response);
                     navigate("/home")
-=======
-                    connessoContext.setConnesso(true);
-                    console.log(response)
-                    console.log(connessoContext.connesso)
-                    utenteContext.setUtente(response);
-                    console.log(utenteContext.utente);
->>>>>>> e7903ff8abd542778dd20b9e914c867e9811a23f
                 }
 
             }).catch(error => {
