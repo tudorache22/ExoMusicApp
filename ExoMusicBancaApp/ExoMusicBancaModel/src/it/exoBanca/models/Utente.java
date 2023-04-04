@@ -10,57 +10,59 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+
 
 /**
  * The persistent class for the utente database table.
  *
  */
 @Entity
-@Table(name="utente")
+@NamedQuery(name="Utente.findAll", query="SELECT u FROM Utente u")
 public class Utente implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id_utente")
-	private Integer idUtente;
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	@Column(name="id_utente")
+	private int idUtente;
 
-	@Column(name="email")
 	private String email;
 
-	@Column(name="password")
 	private String password;
 
-	@Column(name="id_ruolo")
-	private Integer idRuolo;
-
-	@OneToOne
-	@JsonbTransient
-	private Anagrafica anagrafica;
-
+	//bi-directional many-to-one association to Transazione
 	@OneToMany(mappedBy="utente")
 	@JsonbTransient
 	private List<Transazione> listaTransazioni;
 
-	@OneToOne
-	private ContoCorrente contoCorrente;
+	//bi-directional many-to-one association to Anagrafica
+	@ManyToOne
+	@JoinColumn(name="id_anagrafica")
+	private Anagrafica anagrafica;
+
+	//bi-directional many-to-one association to Ruolo
+	@ManyToOne
+	@JoinColumn(name="id_ruolo")
+	@JsonbTransient
+	private Ruolo ruolo;
 
 	public Utente() {
 	}
 
-	public Integer getIdUtente() {
-		return idUtente;
+	public int getIdUtente() {
+		return this.idUtente;
 	}
 
-	public void setIdUtente(Integer idUtente) {
+	public void setIdUtente(int idUtente) {
 		this.idUtente = idUtente;
 	}
 
 	public String getEmail() {
-		return email;
+		return this.email;
 	}
 
 	public void setEmail(String email) {
@@ -68,48 +70,40 @@ public class Utente implements Serializable {
 	}
 
 	public String getPassword() {
-		return password;
+		return this.password;
 	}
 
 	public void setPassword(String password) {
 		this.password = password;
 	}
 
-	public Integer getIdRuolo() {
-		return idRuolo;
+	public List<Transazione> getListaTransazioni() {
+		return this.listaTransazioni;
 	}
 
-	public void setIdRuolo(Integer idRuolo) {
-		this.idRuolo = idRuolo;
+	public void setListaTransazioni(List<Transazione> transaziones) {
+		this.listaTransazioni = transaziones;
 	}
 
 	public Anagrafica getAnagrafica() {
-		return anagrafica;
+		return this.anagrafica;
 	}
 
 	public void setAnagrafica(Anagrafica anagrafica) {
 		this.anagrafica = anagrafica;
 	}
 
-	public List<Transazione> getListaTransazioni() {
-		return listaTransazioni;
+	public Ruolo getRuolo() {
+		return this.ruolo;
 	}
 
-	public void setListaTransazioni(List<Transazione> listaTransazioni) {
-		this.listaTransazioni = listaTransazioni;
-	}
-
-	public ContoCorrente getContoCorrente() {
-		return contoCorrente;
-	}
-
-	public void setContoCorrente(ContoCorrente contoCorrente) {
-		this.contoCorrente = contoCorrente;
+	public void setRuolo(Ruolo ruolo) {
+		this.ruolo = ruolo;
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(anagrafica, contoCorrente, email, idUtente, listaTransazioni, password);
+		return Objects.hash(anagrafica, email, idUtente, password, ruolo, listaTransazioni);
 	}
 
 	@Override
@@ -121,17 +115,15 @@ public class Utente implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Utente other = (Utente) obj;
-		return Objects.equals(anagrafica, other.anagrafica) && Objects.equals(contoCorrente, other.contoCorrente)
-				&& Objects.equals(email, other.email) && Objects.equals(idUtente, other.idUtente)
-				&& Objects.equals(listaTransazioni, other.listaTransazioni) && Objects.equals(password, other.password);
+		return Objects.equals(anagrafica, other.anagrafica) && Objects.equals(email, other.email)
+				&& idUtente == other.idUtente && Objects.equals(password, other.password)
+				&& Objects.equals(ruolo, other.ruolo) && Objects.equals(listaTransazioni, other.listaTransazioni);
 	}
 
 	@Override
 	public String toString() {
-		return "Utente [idUtente=" + idUtente + ", email=" + email + ", password=" + password + ", anagrafica="
-				+ anagrafica + ", listaTransazioni=" + listaTransazioni + ", contoCorrente=" + contoCorrente + "]";
+		return "Utente [idUtente=" + idUtente + ", email=" + email + ", password=" + password + ", transaziones="
+				+ listaTransazioni + ", anagrafica=" + anagrafica + ", ruolo=" + ruolo + "]";
 	}
-
-
 
 }

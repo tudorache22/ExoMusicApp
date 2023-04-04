@@ -8,27 +8,35 @@ import javax.json.bind.annotation.JsonbDateFormat;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
-@Entity
-@Table(name = "conto_corrente")
-public class ContoCorrente implements Serializable {
 
+/**
+ * The persistent class for the conto_corrente database table.
+ *
+ */
+@Entity
+@Table(name="conto_corrente")
+@NamedQuery(name="ContoCorrente.findAll", query="SELECT c FROM ContoCorrente c")
+public class ContoCorrente implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@Column(name = "numero_conto")
+	@Column(name="numero_conto")
 	private String numeroConto;
 
-	@Column(name="data_scadenza")
 	@JsonbDateFormat
+	@Column(name="data_scadenza")
 	private Date dataScadenza;
 
-	@Column(name = "saldo")
 	private Float saldo;
 
+	public ContoCorrente() {
+	}
+
 	public String getNumeroConto() {
-		return numeroConto;
+		return this.numeroConto;
 	}
 
 	public void setNumeroConto(String numeroConto) {
@@ -36,7 +44,7 @@ public class ContoCorrente implements Serializable {
 	}
 
 	public Date getDataScadenza() {
-		return dataScadenza;
+		return this.dataScadenza;
 	}
 
 	public void setDataScadenza(Date dataScadenza) {
@@ -44,7 +52,7 @@ public class ContoCorrente implements Serializable {
 	}
 
 	public Float getSaldo() {
-		return saldo;
+		return this.saldo;
 	}
 
 	public void setSaldo(Float saldo) {

@@ -10,102 +10,105 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
 
+
+/**
+ * The persistent class for the anagrafica database table.
+ *
+ */
 @Entity
-@Table(name = "anagrafica")
+@NamedQuery(name="Anagrafica.findAll", query="SELECT a FROM Anagrafica a")
 public class Anagrafica implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "id_anagrafica")
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	@Column(name="id_anagrafica")
 	private Integer idAnagrafica;
 
-	@Column(name = "nome")
-	private String nome;
-
-	@Column(name = "cognome")
-	private String cognome;
-
-	@Column(name = "codice_fiscale")
+	@Column(name="codice_fiscale")
 	private String codiceFiscale;
 
-	@Column(name = "luogo_nascita")
-	private String luogoNascita;
+	private String cognome;
 
-	@Column(name="data_nascita")
 	@JsonbDateFormat
+	@Column(name="data_nascita")
 	private Date dataNascita;
 
-	@Column(name = "provincia")
+	@Column(name="luogo_nascita")
+	private String luogoNascita;
+
+	private String nome;
+
 	private String provincia;
 
-	@Column(name = "sesso")
 	private Character sesso;
 
 	public static final Character SESSO_UOMO = 'M';
 	public static final Character SESSO_DONNA = 'F';
 
+	//bi-directional many-to-one association to Utente
+	@ManyToOne
+	@JoinColumn(name="id_utente")
+	private Utente utente;
+
+
 	public Anagrafica() {
-
-	}
-
-	public Anagrafica(Integer idAnagrafica, String nome, String cognome, String codiceFiscale, String luogoNascita,String provincia,Date dataNascita, Character sesso) {
-
-		super();
-		this.idAnagrafica = idAnagrafica;
-		this.nome = nome;
-		this.cognome = cognome;
-		this.codiceFiscale = codiceFiscale;
-		this.luogoNascita = luogoNascita;
-		this.provincia = provincia;
-		this.sesso = sesso;
-		this.dataNascita = dataNascita;
 	}
 
 	public Integer getIdAnagrafica() {
-		return idAnagrafica;
+		return this.idAnagrafica;
 	}
 
 	public void setIdAnagrafica(Integer idAnagrafica) {
 		this.idAnagrafica = idAnagrafica;
 	}
 
-	public String getNome() {
-		return nome;
-	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-
-	public String getCognome() {
-		return cognome;
-	}
-
-	public void setCognome(String cognome) {
-		this.cognome = cognome;
-	}
-
 	public String getCodiceFiscale() {
-		return codiceFiscale;
+		return this.codiceFiscale;
 	}
 
 	public void setCodiceFiscale(String codiceFiscale) {
 		this.codiceFiscale = codiceFiscale;
 	}
 
+	public String getCognome() {
+		return this.cognome;
+	}
+
+	public void setCognome(String cognome) {
+		this.cognome = cognome;
+	}
+
+	public Date getDataNascita() {
+		return this.dataNascita;
+	}
+
+	public void setDataNascita(Date dataNascita) {
+		this.dataNascita = dataNascita;
+	}
+
 	public String getLuogoNascita() {
-		return luogoNascita;
+		return this.luogoNascita;
 	}
 
 	public void setLuogoNascita(String luogoNascita) {
 		this.luogoNascita = luogoNascita;
 	}
 
+	public String getNome() {
+		return this.nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
 	public String getProvincia() {
-		return provincia;
+		return this.provincia;
 	}
 
 	public void setProvincia(String provincia) {
@@ -113,24 +116,25 @@ public class Anagrafica implements Serializable {
 	}
 
 	public Character getSesso() {
-		return sesso;
+		return this.sesso;
 	}
 
 	public void setSesso(Character sesso) {
 		this.sesso = sesso;
 	}
 
-	public Date getDataNascita() {
-		return dataNascita;
+	public Utente getUtente() {
+		return this.utente;
 	}
 
-	public void setDataNascita(Date dataNascita) {
-		this.dataNascita = dataNascita;
+	public void setUtente(Utente utente) {
+		this.utente = utente;
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(codiceFiscale, cognome, dataNascita, idAnagrafica, luogoNascita, nome, provincia, sesso);
+		return Objects.hash(codiceFiscale, cognome, dataNascita, idAnagrafica, luogoNascita, nome, provincia, sesso,
+				utente);
 	}
 
 	@Override
@@ -145,14 +149,15 @@ public class Anagrafica implements Serializable {
 		return Objects.equals(codiceFiscale, other.codiceFiscale) && Objects.equals(cognome, other.cognome)
 				&& Objects.equals(dataNascita, other.dataNascita) && Objects.equals(idAnagrafica, other.idAnagrafica)
 				&& Objects.equals(luogoNascita, other.luogoNascita) && Objects.equals(nome, other.nome)
-				&& Objects.equals(provincia, other.provincia) && Objects.equals(sesso, other.sesso);
+				&& Objects.equals(provincia, other.provincia) && Objects.equals(sesso, other.sesso)
+				&& Objects.equals(utente, other.utente);
 	}
 
 	@Override
 	public String toString() {
-		return "Anagrafica [idAnagrafica=" + idAnagrafica + ", nome=" + nome + ", cognome=" + cognome
-				+ ", codiceFiscale=" + codiceFiscale + ", luogoNascita=" + luogoNascita + ", dataNascita=" + dataNascita
-				+ ", provincia=" + provincia + ", sesso=" + sesso + "]";
+		return "Anagrafica [idAnagrafica=" + idAnagrafica + ", codiceFiscale=" + codiceFiscale + ", cognome=" + cognome
+				+ ", dataNascita=" + dataNascita + ", luogoNascita=" + luogoNascita + ", nome=" + nome + ", provincia="
+				+ provincia + ", sesso=" + sesso + ", utente=" + utente +"]";
 	}
 
 }

@@ -15,8 +15,11 @@ import javax.ws.rs.core.Response;
 import org.apache.log4j.Logger;
 
 import it.exoBanca.conf.EJBFactory;
+import it.exoBanca.ejbInterfaces.ContoCorrenteControllerInterface;
 import it.exoBanca.ejbInterfaces.UtenteControllerInterface;
+import it.exoBanca.models.ContoCorrente;
 import it.exoBanca.models.Utente;
+import it.exolab.utility.ContoCorrenteUtility;
 
 @Path("/UtenteRest")
 public class UtenteRest extends BaseRest<Utente> {
@@ -32,6 +35,8 @@ public class UtenteRest extends BaseRest<Utente> {
 		logger.info("sei nel UtenteRest insert >>>" + utente);
 		try {
 			utente = new EJBFactory<UtenteControllerInterface>(UtenteControllerInterface.class).getEJB().insert(utente);
+			ContoCorrente conto = ContoCorrenteUtility.getContoCorrente(utente.getAnagrafica());
+			new EJBFactory<ContoCorrenteControllerInterface>(ContoCorrenteControllerInterface.class).getEJB().insert(conto);
 			return getStandardResponse(utente).build();
 		} catch (Exception e) {
 			e.printStackTrace();

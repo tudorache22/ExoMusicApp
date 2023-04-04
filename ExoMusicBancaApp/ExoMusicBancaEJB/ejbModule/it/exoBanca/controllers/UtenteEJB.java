@@ -17,9 +17,11 @@ public class UtenteEJB extends BaseEJB<Utente> implements UtenteControllerInterf
 	@Override
 	public Utente insert(Utente utente) {
 		try {
+			createEntityManager();
 			getEntityManager().getTransaction().begin();
 			getEntityManager().persist(getEntityManager().contains(utente) ? utente : getEntityManager().merge(utente));
-			operations.insertContoCorrente(utente);
+			System.out.println(utente);
+//			operations.insertContoCorrente(utente);
 			getEntityManager().getTransaction().commit();
 			return utente;
 		} catch (Exception e) {
@@ -36,6 +38,7 @@ public class UtenteEJB extends BaseEJB<Utente> implements UtenteControllerInterf
 	public Utente update(Utente utente) {
 
 		try {
+			createEntityManager();
 			getEntityManager().getTransaction().begin();
 			Utente oldUser = findById(utente.getIdUtente());
 			operations.updateContoCorrente(oldUser, utente);
@@ -53,6 +56,7 @@ public class UtenteEJB extends BaseEJB<Utente> implements UtenteControllerInterf
 	@Override
 	public void delete(Utente utente) {
 		try {
+			createEntityManager();
 			getEntityManager().getTransaction().begin();
 			getEntityManager().remove(getEntityManager().contains(utente) ? utente : getEntityManager().merge(utente));
 			operations.deleteContoCorrente(utente);
@@ -80,6 +84,7 @@ public class UtenteEJB extends BaseEJB<Utente> implements UtenteControllerInterf
 	public Utente findByEmailPassword(Utente utente) {
 
 		try {
+			createEntityManager();
 			getEntityManager().getTransaction().begin();
 			Query query = getEntityManager().createNativeQuery(Const.QUERY_LOGIN
 					.replace(":placeEmail:", utente.getEmail()).replace(":placePassword:", utente.getPassword()));

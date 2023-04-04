@@ -34,6 +34,7 @@ public class ContoCorrenteEJB extends BaseEJB<ContoCorrente> implements ContoCor
 	@Override
 	public ContoCorrente findByNumeroConto(String numeroConto) {
 		try {
+			createEntityManager();
 			getEntityManager().getTransaction().begin();
 			ContoCorrente contoCorrente = getEntityManager().find(ContoCorrente.class, numeroConto);
 			getEntityManager().getTransaction().commit();

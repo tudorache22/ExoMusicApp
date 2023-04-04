@@ -26,7 +26,7 @@ public class Operations {
 		ContoCorrente oldContoCorrente = new ContoCorrenteEJB().findByNumeroConto(numeroConto);
 		entityManager.remove(oldContoCorrente);
 
-		entityManager.persist(newUser);
+		entityManager.merge(newUser);
 
 		ContoCorrente newContoCorrente = ContoCorrenteUtility.getContoCorrente(newUser.getAnagrafica(), oldContoCorrente.getSaldo(), oldContoCorrente.getDataScadenza());
 		entityManager.persist(newContoCorrente);

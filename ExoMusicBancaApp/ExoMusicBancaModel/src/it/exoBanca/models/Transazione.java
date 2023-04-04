@@ -12,49 +12,55 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
-import javax.persistence.Table;
 
 
+/**
+ * The persistent class for the transazione database table.
+ *
+ */
 @Entity
-@Table(name="transazione")
+@NamedQuery(name="Transazione.findAll", query="SELECT t FROM Transazione t")
 public class Transazione implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id_transazione")
-	private int idTransazione;
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	@Column(name="id_transazione")
+	private Integer idTransazione;
 
-	@Column(name = "data")
 	@JsonbDateFormat
 	private Date data;
 
-	@Column(name="importo")
-	private String importo;
+	private Float importo;
 
-	@Column(name="stato")
-	private String stato;
+	private Integer stato;
 
-	@Column(name = "tipo_transazione")
+	public static final Integer TRANSAZIONE_ATTIVA = 1;
+	public static final Integer TRANSAZIONE_SCADUTA = 0;
+
+	@Column(name="tipo_transazione")
 	private String tipoTransazione;
 
-	@Column(name="id_utente")
-	private Integer idUtente;
+	//bi-directional many-to-one association to Otp
+	@OneToMany(mappedBy="transazione")
+	@JsonbTransient
+	private List<Otp> otps;
 
+	//bi-directional many-to-one association to Utente
 	@ManyToOne
+	@JoinColumn(name="id_utente")
 	@JsonbTransient
 	private Utente utente;
-
-	@OneToMany(mappedBy="transazione")
-	private List<Otp> listaOtp;
 
 	public Transazione() {
 	}
 
 	public int getIdTransazione() {
-		return idTransazione;
+		return this.idTransazione;
 	}
 
 	public void setIdTransazione(int idTransazione) {
@@ -62,64 +68,70 @@ public class Transazione implements Serializable {
 	}
 
 	public Date getData() {
-		return data;
+		return this.data;
 	}
 
 	public void setData(Date data) {
 		this.data = data;
 	}
 
-	public String getImporto() {
-		return importo;
+	public float getImporto() {
+		return this.importo;
 	}
 
-	public void setImporto(String importo) {
+	public void setImporto(float importo) {
 		this.importo = importo;
 	}
 
-	public String getStato() {
-		return stato;
+	public int getStato() {
+		return this.stato;
 	}
 
-	public void setStato(String stato) {
+	public void setStato(int stato) {
 		this.stato = stato;
 	}
 
 	public String getTipoTransazione() {
-		return tipoTransazione;
+		return this.tipoTransazione;
 	}
 
 	public void setTipoTransazione(String tipoTransazione) {
 		this.tipoTransazione = tipoTransazione;
 	}
 
-	public Integer getIdUtente() {
-		return idUtente;
+	public List<Otp> getOtps() {
+		return this.otps;
 	}
 
-	public void setIdUtente(Integer idUtente) {
-		this.idUtente = idUtente;
+	public void setOtps(List<Otp> otps) {
+		this.otps = otps;
+	}
+
+	public Otp addOtp(Otp otp) {
+		getOtps().add(otp);
+		otp.setTransazione(this);
+
+		return otp;
+	}
+
+	public Otp removeOtp(Otp otp) {
+		getOtps().remove(otp);
+		otp.setTransazione(null);
+
+		return otp;
 	}
 
 	public Utente getUtente() {
-		return utente;
+		return this.utente;
 	}
 
 	public void setUtente(Utente utente) {
 		this.utente = utente;
 	}
 
-	public List<Otp> getListaOtp() {
-		return listaOtp;
-	}
-
-	public void setListaOtp(List<Otp> listaOtp) {
-		this.listaOtp = listaOtp;
-	}
-
 	@Override
 	public int hashCode() {
-		return Objects.hash(data, idTransazione, importo, stato, tipoTransazione);
+		return Objects.hash(data, idTransazione, importo, otps, stato, tipoTransazione, utente);
 	}
 
 	@Override
@@ -131,16 +143,16 @@ public class Transazione implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Transazione other = (Transazione) obj;
-		return Objects.equals(data, other.data) && idTransazione == other.idTransazione
-				&& Objects.equals(importo, other.importo) && Objects.equals(stato, other.stato)
-				&& Objects.equals(tipoTransazione, other.tipoTransazione);
+		return Objects.equals(data, other.data) && Objects.equals(idTransazione, other.idTransazione)
+				&& Objects.equals(importo, other.importo) && Objects.equals(otps, other.otps)
+				&& Objects.equals(stato, other.stato) && Objects.equals(tipoTransazione, other.tipoTransazione)
+				&& Objects.equals(utente, other.utente);
 	}
 
 	@Override
 	public String toString() {
 		return "Transazione [idTransazione=" + idTransazione + ", data=" + data + ", importo=" + importo + ", stato="
-				+ stato + ", tipoTransazione=" + tipoTransazione + "]";
+				+ stato + ", tipoTransazione=" + tipoTransazione + ", otps=" + otps + ", utente=" + utente + "]";
 	}
-
 
 }

@@ -14,12 +14,13 @@ import it.exolab.costanti.Const;
 public abstract class BaseEJB<T> {
 
 	private final EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory(Const.MODELS_PROJECT_NAME);
-	private final EntityManager entityManager = entityManagerFactory.createEntityManager();
+	private EntityManager entityManager;
 	private EntityTransaction transaction;
 
-	protected Operations operations = new Operations(entityManager);
+	protected Operations operations = new Operations(entityManagerFactory.createEntityManager());
 
 	public T insert(T model) {
+		entityManager = entityManagerFactory.createEntityManager();
 		transaction = entityManager.getTransaction();
 
 		try {
@@ -37,6 +38,7 @@ public abstract class BaseEJB<T> {
 	}
 
 	public T update (T model) {
+		entityManager = entityManagerFactory.createEntityManager();
 		transaction = entityManager.getTransaction();
 
 		try {
@@ -54,6 +56,7 @@ public abstract class BaseEJB<T> {
 	}
 
 	public void delete(T model) {
+		entityManager = entityManagerFactory.createEntityManager();
 		transaction = entityManager.getTransaction();
 
 		try {
@@ -70,6 +73,7 @@ public abstract class BaseEJB<T> {
 	}
 
 	public T findById(Class<T> modelClass, Integer id) {
+		entityManager = entityManagerFactory.createEntityManager();
 		transaction = entityManager.getTransaction();
 
 		try {
@@ -89,6 +93,7 @@ public abstract class BaseEJB<T> {
 
 	@SuppressWarnings("unchecked")
 	public List<T> findAll(String table){
+		entityManager = entityManagerFactory.createEntityManager();
 		transaction = entityManager.getTransaction();
 
 		try {
@@ -109,5 +114,9 @@ public abstract class BaseEJB<T> {
 
 	public EntityManager getEntityManager() {
 		return entityManager;
+	}
+
+	public void createEntityManager() {
+		entityManager = entityManagerFactory.createEntityManager();
 	}
 }

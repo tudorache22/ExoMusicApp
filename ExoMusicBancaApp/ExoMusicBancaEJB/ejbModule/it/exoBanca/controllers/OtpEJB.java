@@ -54,8 +54,7 @@ public class OtpEJB extends BaseEJB<Otp> implements OtpControllerInterface{
 			otp.setCodice(new GeneraOtp().generator());
 			otp.setCreazione(Date.valueOf(LocalDate.now()));
 			otp.setScadenza(Date.valueOf(LocalDate.now().plusDays(1)));
-			otp.setStato(Otp.STATO_ATTIVO);
-			otp.setIdTransazione(transazione.getIdTransazione());
+			otp.setTransazione(transazione);
 			insert(otp);
 		} catch (Exception e) {
 			e.printStackTrace();

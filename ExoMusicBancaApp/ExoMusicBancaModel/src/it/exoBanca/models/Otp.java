@@ -10,55 +10,51 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.NamedQuery;
 
+
+/**
+ * The persistent class for the otp database table.
+ *
+ */
 @Entity
-@Table(name="otp")
+@NamedQuery(name="Otp.findAll", query="SELECT o FROM Otp o")
 public class Otp implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id_otp")
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	@Column(name="id_otp")
 	private Integer idOtp;
 
-	@Column(name = "codice")
 	private String codice;
 
-	@Column(name = "creazione")
 	@JsonbDateFormat
 	private Date creazione;
 
-	@Column(name = "scadenza")
 	@JsonbDateFormat
 	private Date scadenza;
 
-	@Column(name="stato")
-	private String stato;
-
-	@Column(name="id_transazione")
-	private Integer idTransazione;
-
+	//bi-directional many-to-one association to Transazione
 	@ManyToOne
+	@JoinColumn(name="id_transazione")
 	private Transazione transazione;
-
-	public static final String STATO_ATTIVO = "attivo";
-	public static final String STATO_SCADUTO = "scaduto";
 
 	public Otp() {
 	}
 
-	public Integer getIdOtp() {
-		return idOtp;
+	public int getIdOtp() {
+		return this.idOtp;
 	}
 
-	public void setIdOtp(Integer idOtp) {
+	public void setIdOtp(int idOtp) {
 		this.idOtp = idOtp;
 	}
 
 	public String getCodice() {
-		return codice;
+		return this.codice;
 	}
 
 	public void setCodice(String codice) {
@@ -66,7 +62,7 @@ public class Otp implements Serializable {
 	}
 
 	public Date getCreazione() {
-		return creazione;
+		return this.creazione;
 	}
 
 	public void setCreazione(Date creazione) {
@@ -74,31 +70,15 @@ public class Otp implements Serializable {
 	}
 
 	public Date getScadenza() {
-		return scadenza;
+		return this.scadenza;
 	}
 
 	public void setScadenza(Date scadenza) {
 		this.scadenza = scadenza;
 	}
 
-	public String getStato() {
-		return stato;
-	}
-
-	public void setStato(String stato) {
-		this.stato = stato;
-	}
-
-	public Integer getIdTransazione() {
-		return idTransazione;
-	}
-
-	public void setIdTransazione(Integer idTransazione) {
-		this.idTransazione = idTransazione;
-	}
-
 	public Transazione getTransazione() {
-		return transazione;
+		return this.transazione;
 	}
 
 	public void setTransazione(Transazione transazione) {
@@ -107,7 +87,7 @@ public class Otp implements Serializable {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(codice, creazione, idOtp, scadenza, stato, transazione);
+		return Objects.hash(codice, creazione, idOtp, scadenza, transazione);
 	}
 
 	@Override
@@ -120,16 +100,14 @@ public class Otp implements Serializable {
 			return false;
 		Otp other = (Otp) obj;
 		return Objects.equals(codice, other.codice) && Objects.equals(creazione, other.creazione)
-				&& idOtp == other.idOtp && Objects.equals(scadenza, other.scadenza)
-				&& Objects.equals(stato, other.stato) && Objects.equals(transazione, other.transazione);
+				&& Objects.equals(idOtp, other.idOtp) && Objects.equals(scadenza, other.scadenza)
+				&& Objects.equals(transazione, other.transazione);
 	}
 
 	@Override
 	public String toString() {
 		return "Otp [idOtp=" + idOtp + ", codice=" + codice + ", creazione=" + creazione + ", scadenza=" + scadenza
-				+ ", stato=" + stato + ", transazione=" + transazione + "]";
+				+ ", transazione=" + transazione + "]";
 	}
-
-
 
 }
