@@ -16,7 +16,7 @@ const ContainerHeader = () => {
     if (connessoContext.connesso === true) {
         return (
             <div>
-                <p>Benvenuto </p>
+                <p>Benvenuto {utenteContext.utente.anagrafica.nome}</p>
                 <label>Vuoi fare il LogOut?</label>
                 <button type="text" onClick={() => { connessoContext.setConnesso(false); navigate("/login") }}></button>
             </div>

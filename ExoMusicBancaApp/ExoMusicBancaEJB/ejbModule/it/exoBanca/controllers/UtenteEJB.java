@@ -10,17 +10,16 @@ import it.exoBanca.ejbInterfaces.UtenteControllerInterface;
 import it.exoBanca.models.Utente;
 import it.exolab.costanti.Const;
 
-@Stateless(name="UtenteControllerInterface")
+@Stateless(name = "UtenteControllerInterface")
 @LocalBean
-public class UtenteEJB extends BaseEJB<Utente> implements UtenteControllerInterface{
+public class UtenteEJB extends BaseEJB<Utente> implements UtenteControllerInterface {
 
 	@Override
 	public Utente insert(Utente utente) {
 		try {
 			createEntityManager();
 			getEntityManager().getTransaction().begin();
-			if(null != utente)
-				getEntityManager().persist(getEntityManager().contains(utente) ? utente : getEntityManager().merge(utente));
+			getEntityManager().persist(getEntityManager().contains(utente) ? utente : getEntityManager().merge(utente));
 			System.out.println(utente);
 //			operations.insertContoCorrente(utente);
 			getEntityManager().getTransaction().commit();
@@ -88,11 +87,12 @@ public class UtenteEJB extends BaseEJB<Utente> implements UtenteControllerInterf
 			createEntityManager();
 			getEntityManager().getTransaction().begin();
 			Query query = getEntityManager().createNativeQuery(Const.QUERY_LOGIN
-					.replace(":placeEmail:", utente.getEmail()).replace(":placePassword:", utente.getPassword()),Utente.class);
+					.replace(":placeEmail:", utente.getEmail()).replace(":placePassword:", utente.getPassword()),
+					Utente.class);
 			Utente utenteLogin = (Utente) query.getSingleResult();
 			getEntityManager().getTransaction().commit();
 			return utenteLogin;
-		}catch(Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 			getEntityManager().getTransaction().rollback();
 		} finally {

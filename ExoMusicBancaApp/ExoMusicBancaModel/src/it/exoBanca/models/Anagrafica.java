@@ -14,31 +14,30 @@ import javax.persistence.JoinColumn;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 
-
 /**
  * The persistent class for the anagrafica database table.
  *
  */
 @Entity
-@NamedQuery(name="Anagrafica.findAll", query="SELECT a FROM Anagrafica a")
+@NamedQuery(name = "Anagrafica.findAll", query = "SELECT a FROM Anagrafica a")
 public class Anagrafica implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="id_anagrafica")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id_anagrafica")
 	private Integer idAnagrafica;
 
-	@Column(name="codice_fiscale")
+	@Column(name = "codice_fiscale")
 	private String codiceFiscale;
 
 	private String cognome;
 
 	@JsonbDateFormat
-	@Column(name="data_nascita")
+	@Column(name = "data_nascita")
 	private Date dataNascita;
 
-	@Column(name="luogo_nascita")
+	@Column(name = "luogo_nascita")
 	private String luogoNascita;
 
 	private String nome;
@@ -50,9 +49,9 @@ public class Anagrafica implements Serializable {
 	public static final Character SESSO_UOMO = 'M';
 	public static final Character SESSO_DONNA = 'F';
 
-	//bi-directional one-to-one association to Utente
+	// bi-directional one-to-one association to Utente
 	@OneToOne
-	@JoinColumn(name="id_anagrafica", referencedColumnName="id_anagrafica")
+	@JoinColumn(name = "id_anagrafica", referencedColumnName = "id_anagrafica")
 	private Utente utente;
 
 	public Anagrafica() {
@@ -132,8 +131,8 @@ public class Anagrafica implements Serializable {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(codiceFiscale, cognome, dataNascita, idAnagrafica, luogoNascita, nome, provincia,
-				sesso, utente);
+		return Objects.hash(codiceFiscale, cognome, dataNascita, idAnagrafica, luogoNascita, nome, provincia, sesso,
+				utente);
 	}
 
 	@Override
@@ -147,16 +146,16 @@ public class Anagrafica implements Serializable {
 		Anagrafica other = (Anagrafica) obj;
 		return Objects.equals(codiceFiscale, other.codiceFiscale) && Objects.equals(cognome, other.cognome)
 				&& Objects.equals(dataNascita, other.dataNascita) && Objects.equals(idAnagrafica, other.idAnagrafica)
-				&& Objects.equals(luogoNascita, other.luogoNascita)
-				&& Objects.equals(nome, other.nome) && Objects.equals(provincia, other.provincia)
-				&& Objects.equals(sesso, other.sesso) && Objects.equals(utente, other.utente);
+				&& Objects.equals(luogoNascita, other.luogoNascita) && Objects.equals(nome, other.nome)
+				&& Objects.equals(provincia, other.provincia) && Objects.equals(sesso, other.sesso)
+				&& Objects.equals(utente, other.utente);
 	}
 
 	@Override
 	public String toString() {
 		return "Anagrafica [idAnagrafica=" + idAnagrafica + ", codiceFiscale=" + codiceFiscale + ", cognome=" + cognome
-				+ ", dataNascita=" + dataNascita + ", luogoNascita=" + luogoNascita
-				+ ", nome=" + nome + ", provincia=" + provincia + ", sesso=" + sesso + ", utente=" + utente + "]";
+				+ ", dataNascita=" + dataNascita + ", luogoNascita=" + luogoNascita + ", nome=" + nome + ", provincia="
+				+ provincia + ", sesso=" + sesso + ", utente=" + utente + "]";
 	}
 
 }

@@ -1,5 +1,6 @@
 import React from "react";
 import { Route, Switch, useHistory } from "react-router-dom";
+import Anagrafica from "../FormIniziale/Anagrafica";
 import Login from "../FormIniziale/Login";
 import Register from "../FormIniziale/Register";
 import Assistenza from "./Assistenza";
@@ -31,11 +32,14 @@ const Main = () => {
                 <Route exact path={"/operazioni"}>
                     <Operazioni />
                 </Route>
-                {/* <Route exact path={"/conto"}>
+                <Route exact path={"/conto"}>
                     <Conto />
-                </Route> */}
+                </Route>
                 <Route exact path={"/assistenza"}>
                     <Assistenza />
+                </Route>
+                <Route exact path={"/anagrafica"}>
+                    <Anagrafica />
                 </Route>
             </Switch>
         </div>

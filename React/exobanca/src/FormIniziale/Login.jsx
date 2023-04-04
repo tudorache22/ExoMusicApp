@@ -21,6 +21,7 @@ const Login = () => {
             email: email,
             password: password
         }
+        console.log(requestBody);
         fetch(URI, {
             method: "POST",
             body: JSON.stringify(requestBody),
@@ -34,8 +35,7 @@ const Login = () => {
                     console.log(response)
                     console.log(connessoContext.connesso)
                     utenteContext.setUtente(response);
-                    console.log(utenteContext.utente)
-                    navigate("/home")
+                    console.log(utenteContext.utente);
                 }
 
             }).catch(error => {
@@ -65,11 +65,11 @@ const Login = () => {
             <input type="text" placeholder="Inserisc la tua email" id="emailLogin" value={email} onChange={(e) => setEmail(e.target.value)} />
             <label for="passwordLogin">Password:</label>
             <input type="text" placeholder="Inserisci la password" id="passwordLogin" value={password} onChange={(e) => setPassword(e.target.value)} />
-            <button type="button" className="btn btn-outline-danger" onClick={() => saveUtente()}>Accedi</button>
+            <button type="button" className="btn btn-outline-danger" onClick={() => { saveUtente(); navigate("/home") }}>Accedi</button>
             <button type="button" className="btn btn-outline-danger" onClick={() => provaGet()}>prova</button>
 
             <label for="">Non hai un account?</label>
-            <button type="button" className="btn btn-outline-danger" onClick={() => navigate("/register")}>Registrati</button>
+            <button type="button" className="btn btn-outline-danger" onClick={() => navigate("/anagrafica")}>Crea un account</button>
         </form >
     )
 

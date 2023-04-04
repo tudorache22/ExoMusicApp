@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 
-import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,39 +14,36 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 
-
 /**
  * The persistent class for the utente database table.
  *
  */
 @Entity
-@NamedQuery(name="Utente.findAll", query="SELECT u FROM Utente u")
+@NamedQuery(name = "Utente.findAll", query = "SELECT u FROM Utente u")
 public class Utente implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(name="id_utente")
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "id_utente")
 	private Integer idUtente;
 
 	private String email;
 
 	private String password;
 
-	//bi-directional many-to-one association to Transazione
-	@OneToMany(mappedBy="utente")
-	@JsonbTransient
+	// bi-directional many-to-one association to Transazione
+	@OneToMany(mappedBy = "utente")
 	private List<Transazione> listaTransazioni;
 
-	//bi-directional many-to-one association to Anagrafica
+	// bi-directional many-to-one association to Anagrafica
 	@ManyToOne
-	@JoinColumn(name="id_anagrafica")
+	@JoinColumn(name = "id_anagrafica")
 	private Anagrafica anagrafica;
 
-	//bi-directional many-to-one association to Ruolo
+	// bi-directional many-to-one association to Ruolo
 	@ManyToOne
-	@JoinColumn(name="id_ruolo")
-	@JsonbTransient
+	@JoinColumn(name = "id_ruolo")
 	private Ruolo ruolo;
 
 	public Utente() {

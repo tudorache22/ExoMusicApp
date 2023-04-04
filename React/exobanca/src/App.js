@@ -14,13 +14,13 @@ export const ContoCorrenteContext = createContext();
 function App() {
 
   const [anagrafica, setAnagrafica] = useState({
-    idAnagrafica: "",
-    nome: "",
-    cognome: "",
     codiceFiscale: "",
-    luogoDiNascita: "",
-    provincia: "",
+    cognome: "",
     dataNascita: "",
+    idAnagrafica: "",
+    luogoNascita: "",
+    nome: "",
+    provincia: "",
     sesso: ""
   })
 
@@ -28,7 +28,6 @@ function App() {
     idUtente: "",
     password: "",
     email: "",
-    ruolo: "",
     anagrafica: anagrafica
   })
 
