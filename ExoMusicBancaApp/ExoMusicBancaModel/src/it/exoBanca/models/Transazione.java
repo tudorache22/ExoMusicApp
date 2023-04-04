@@ -59,11 +59,11 @@ public class Transazione implements Serializable {
 	public Transazione() {
 	}
 
-	public int getIdTransazione() {
+	public Integer getIdTransazione() {
 		return this.idTransazione;
 	}
 
-	public void setIdTransazione(int idTransazione) {
+	public void setIdTransazione(Integer idTransazione) {
 		this.idTransazione = idTransazione;
 	}
 

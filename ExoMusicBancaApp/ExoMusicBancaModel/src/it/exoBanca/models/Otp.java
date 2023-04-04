@@ -45,11 +45,11 @@ public class Otp implements Serializable {
 	public Otp() {
 	}
 
-	public int getIdOtp() {
+	public Integer getIdOtp() {
 		return this.idOtp;
 	}
 
-	public void setIdOtp(int idOtp) {
+	public void setIdOtp(Integer idOtp) {
 		this.idOtp = idOtp;
 	}
 

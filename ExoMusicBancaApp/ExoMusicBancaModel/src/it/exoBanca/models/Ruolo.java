@@ -36,11 +36,11 @@ public class Ruolo implements Serializable {
 	public Ruolo() {
 	}
 
-	public int getIdRuolo() {
+	public Integer getIdRuolo() {
 		return this.idRuolo;
 	}
 
-	public void setIdRuolo(int idRuolo) {
+	public void setIdRuolo(Integer idRuolo) {
 		this.idRuolo = idRuolo;
 	}
 
