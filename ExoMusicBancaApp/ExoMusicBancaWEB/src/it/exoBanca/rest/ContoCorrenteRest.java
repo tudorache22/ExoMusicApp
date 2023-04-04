@@ -70,7 +70,6 @@ public class ContoCorrenteRest extends BaseRest<ContoCorrente> {
 		logger.info("sei nel ContoCorrenteRest findByIdUtente >>>" + idUtente);
 		try {
 			Utente utente = new EJBFactory<UtenteControllerInterface>(UtenteControllerInterface.class).getEJB().findById(idUtente);
-
 			ContoCorrente contoCorrente = new EJBFactory<ContoCorrenteControllerInterface>(ContoCorrenteControllerInterface.class)
 					.getEJB().findByNumeroConto(ContoCorrenteUtility.getNumeroConto(utente.getAnagrafica()));
 			return getStandardResponse(contoCorrente).build();

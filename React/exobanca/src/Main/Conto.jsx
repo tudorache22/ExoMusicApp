@@ -1,84 +1,90 @@
 import React, { useContext, useEffect, useState } from "react";
-import { ContoCorrenteContext, UtenteContext } from "../App";
+import { ConnessoContext, ContoCorrenteContext, UtenteContext } from "../App";
 
 const Conto = () => {
-    //     // const utenteContext = useContext(UtenteContext);
-    //     const contoCorrenteContext = useContext(ContoCorrenteContext);
-    //     const [movimenti, setMovimenti] = useState([]);
-    //     const URIconto = "" + utenteContext.utente.idUtente;
-    //     const URImovimenti = "" + utenteContext.utente.idUtente;
+    const connessoContext = useContext(ConnessoContext);
+    const [transazioni, setTransazioni] = useState([]);
+    const URIconto = "http://127.0.0.1:8080/ExoMusicBancaWEB-0.0.1-SNAPSHOT/rest/ContoCorrenteRest/findByIdUtente/";
+    const URImovimenti = "";
+    const utenteContext = useContext(UtenteContext);
+    const contoCorrenteContext = useContext(ContoCorrenteContext);
 
-    //     function trovaConto() {
-    //         fetch(URIconto, {
-    //             method: "GET",
-    //             headers: {
-    //                 'Content-type': 'application/json;charset=UTF-8'
-    //             }
-    //         }).then(responseJson => responseJson.json())
-    //             .then(response => {
-    //                 console.log(response);
-    //                 contoCorrenteContext.setContoCorrente(response);
-    //             })
-    //             .catch(error => {
-    //                 console.log(error);
-    //             })
-    //     }
+    function trovaConto() {
+        fetch(URIconto + utenteContext.utente.idUtente, {
+            method: "GET",
+            headers: {
+                'Content-type': 'application/json;charset=UTF-8'
+            }
+        }).then(responseJson => responseJson.json())
+            .then(response => {
+                console.log(response);
+                contoCorrenteContext.setContoCorrente(response);
+            })
+            .catch(error => {
+                console.log(error);
+            })
+    }
 
-    //     function trovaMovimenti() {
+    function trovaTransazioni() {
 
-    //         fetch(URImovimenti, {
-    //             method: "GET",
-    //             headers: {
-    //                 'Content-type': 'application/json;charset=UTF-8'
-    //             }
-    //         }).then(responseJson => responseJson.json())
-    //             .then(response => {
-    //                 setMovimenti(response);
-    //             })
-    //             .catch(error => {
-    //                 console.log(error);
-    //             })
+        fetch(URImovimenti + utenteContext.utente.idUtente, {
+            method: "GET",
+            headers: {
+                'Content-type': 'application/json;charset=UTF-8'
+            }
+        }).then(responseJson => responseJson.json())
+            .then(response => {
+                setTransazioni(response);
+            })
+            .catch(error => {
+                console.log(error);
+            })
 
-    //     }
+    }
 
-    //     /*
-    //     useEffect(() => {
-    //         trovaConto();
-    //         trovaMovimenti();
-    //     }, []);
-    // */
-    //     return (
-    //         <div>
-    //             <form>
-    //                 <h1>Il tuo Conto</h1>
-    //                 <p>conto:</p>
-    //                 <b>{contoCorrenteContext.conto.numeroConto}</b>
-    //                 <h4>Il tuo conto attuale è di </h4>
-    //                 <h2>{contoCorrenteContext.conto.saldo}</h2>
-    //             </form>
-    //             <form>
-    //                 <table>
-    //                     <thead>
-    //                         <tr>
-    //                             <th scope="col">Importo</th>
-    //                             <th scope="col">Stato</th>
-    //                             <th scope="col">Info</th>
-    //                         </tr>
-    //                     </thead>
-    //                 </table>
-    //                 {movimenti.length > 0 ?
-    //                     <div>
-    //                         {movimenti.map}
+    useEffect(() => {
+        trovaConto();
+        trovaTransazioni();
+    }, []);
 
-    //                     </div> :
+    return connessoContext.connesso ? (
+        <div>
+            <form>
+                <h1>Il tuo Conto</h1>
+                <h2>{contoCorrenteContext.contoCorrente.numeroConto}</h2>
 
-    //                     <div>
-    //                     </div>}
+                <h4>Il tuo saldo attuale è di {contoCorrenteContext.contoCorrente.saldo} €</h4>
 
-    //             </form>
-    //         </div>
-    //     )
+            </form>
+            <form>
+                <table>
+                    <thead>
+                        <tr>
+                            <th scope="col">Importo</th>
+                            <th scope="col">Stato</th>
+                            <th scope="col">Info</th>
+                        </tr>
+                    </thead>
+                </table>
+                {transazioni.length > 0 ?
+                    <div>
+                        {transazioni.map}
+
+                    </div> :
+
+                    <div>
+                    </div>}
+
+            </form>
+        </div>
+    )
+        : (
+            <div>
+
+                <p>non connesso</p>
+            </div>
+        )
 
 }
 
-export default Conto();
+export default Conto;

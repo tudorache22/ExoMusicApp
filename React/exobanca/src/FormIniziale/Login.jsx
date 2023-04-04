@@ -16,6 +16,12 @@ const Login = () => {
         history.push(path);
     }
 
+    function log(utente) {
+        console.log(utente);
+        utenteContext.setUtente(utente);
+        connessoContext.setConnesso(true);
+    }
+
     function saveUtente() {
         let requestBody = {
             email: email,
@@ -27,14 +33,11 @@ const Login = () => {
             headers: {
                 'Content-type': 'application/json;charset=UTF-8'
             }
-        }).then(responseJson => responseJson.json())
+        })
+            .then(responseJson => responseJson.json())
             .then(response => {
                 if (null !== response && response !== "") {
-                    connessoContext.setConnesso(true);
-                    console.log(response)
-                    console.log(connessoContext.connesso)
-                    utenteContext.setUtente(response);
-                    console.log(utenteContext.utente)
+                    log(response);
                     navigate("/home")
                 }
 
